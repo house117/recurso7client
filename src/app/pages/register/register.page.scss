@@ -1,0 +1,11 @@
+:host {
+    ion-content {
+        --background: linear-gradient(
+            197deg,
+            rgb(185, 213, 240) 0%,
+            rgb(1, 67, 129) 24.5%,
+            rgb(1, 67, 129) 44.33%,
+            rgb(185, 213, 240) 100%
+        ) !important;
+    }
+}

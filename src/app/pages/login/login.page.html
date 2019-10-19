@@ -1,0 +1,97 @@
+<ion-content padding class="animated fadeIn login auth-page">
+    <div class="theme-bg"></div>
+    <div class="auth-content">
+        <!-- Logo -->
+        <div padding-horizontal text-center class="animated fadeInDown">
+            <div class="logo"></div>
+            <h4 no-margin>
+                <ion-text color="light" class="fw700">
+                    Recursos7
+                </ion-text>
+            </h4>
+        </div>
+        <br /><br />
+        <!-- Login form -->
+        <form [formGroup]="onLoginForm" class="list-form">
+            <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="floating">
+                    <ion-icon name="md-person" item-start></ion-icon>
+                    Usuario
+                </ion-label>
+                <ion-input
+                    color="secondary"
+                    type="text"
+                    formControlName="email"
+                ></ion-input>
+            </ion-item>
+            <p
+                ion-text
+                class="text08"
+                *ngIf="
+                    onLoginForm.get('email').touched &&
+                    onLoginForm.get('email').hasError('required')
+                "
+            >
+                <ion-text color="warning">
+                    Campo requerido
+                </ion-text>
+            </p>
+
+            <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="floating">
+                    <ion-icon name="lock" item-start></ion-icon>
+                    Contraseña
+                </ion-label>
+                <ion-input
+                    color="secondary"
+                    type="password"
+                    formControlName="password"
+                ></ion-input>
+            </ion-item>
+            <p
+                ion-text
+                color="warning"
+                class="text08"
+                *ngIf="
+                    onLoginForm.get('password').touched &&
+                    onLoginForm.get('password').hasError('required')
+                "
+            >
+                <ion-text color="warning">
+                    Campo requerido
+                </ion-text>
+            </p>
+        </form>
+        <br /><br /><br />
+        <div>
+            <ion-button
+                icon-left
+                size="medium"
+                expand="full"
+                shape="round"
+                color="dark"
+                (click)="goToHome()"
+                [disabled]="!onLoginForm.valid"
+                tappable
+            >
+                <ion-icon name="log-in"></ion-icon>
+                Iniciar sesión
+            </ion-button>
+
+            <p text-center>
+                <ion-text color="light">
+                    O si aún no tienes cuenta
+                </ion-text>
+            </p>
+        </div>
+
+        <!-- Other links -->
+        <div text-center margin-top>
+            <span (click)="goToRegister()" class="paz" tappable>
+                <ion-text color="light">
+                    <strong>Regístrate</strong>
+                </ion-text>
+            </span>
+        </div>
+    </div>
+</ion-content>

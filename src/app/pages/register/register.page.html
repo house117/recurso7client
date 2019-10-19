@@ -1,0 +1,161 @@
+<ion-content padding class="login auth-page">
+    <div class="auth-content">
+        <!-- Logo -->
+        <div padding-horizontal text-center>
+            <div class="logo"></div>
+            <h3 no-margin>
+                <ion-text color="light" class="fw700">
+                    <ion-text color="light">Register</ion-text>
+                </ion-text>
+            </h3>
+        </div>
+
+        <!-- Register form -->
+        <form [formGroup]="onRegisterForm" class="list-form">
+            <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="floating">
+                    <ion-icon name="md-person" item-start></ion-icon>
+                    Nombre completo
+                </ion-label>
+                <ion-input
+                    color="secondary"
+                    type="text"
+                    formControlName="fullName"
+                ></ion-input>
+            </ion-item>
+            <p
+                ion-text
+                class="text08"
+                *ngIf="
+                    onRegisterForm.get('fullName').touched &&
+                    onRegisterForm.get('fullName').hasError('required')
+                "
+            >
+                <ion-text color="warning">
+                    Campo requerido
+                </ion-text>
+            </p>
+
+            <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="floating">
+                    <ion-icon name="md-briefcase" item-start></ion-icon>
+                    Cargo
+                </ion-label>
+                <ion-select style="color: white;" formControlName="charge">
+                    <ion-select-option value="t">Tesorero</ion-select-option>
+                    <ion-select-option value="m">Male</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <p
+                ion-text
+                class="text08"
+                *ngIf="
+                    onRegisterForm.get('charge').touched &&
+                    onRegisterForm.get('charge').hasError('required')
+                "
+            >
+                <ion-text color="warning">
+                    Campo requerido
+                </ion-text>
+            </p>
+
+            <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="floating">
+                    <ion-icon name="md-person" item-start></ion-icon>
+                    Nombre de usuario
+                </ion-label>
+                <ion-input
+                    color="secondary"
+                    type="text"
+                    formControlName="username"
+                ></ion-input>
+            </ion-item>
+            <p
+                ion-text
+                class="text08"
+                *ngIf="
+                    onRegisterForm.get('username').touched &&
+                    onRegisterForm.get('username').hasError('required')
+                "
+            >
+                <ion-text color="warning">
+                    Campo requerido
+                </ion-text>
+            </p>
+
+            <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="floating">
+                    <ion-icon name="lock" item-start></ion-icon>
+                    Contraseña
+                </ion-label>
+                <ion-input
+                    color="secondary"
+                    type="password"
+                    formControlName="password"
+                ></ion-input>
+            </ion-item>
+            <p
+                ion-text
+                color="warning"
+                class="text08"
+                *ngIf="
+                    onRegisterForm.get('password').touched &&
+                    onRegisterForm.get('password').hasError('required')
+                "
+            >
+                <ion-text color="warning">
+                    Campo requerido
+                </ion-text>
+            </p>
+            <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="floating">
+                    <ion-icon name="lock" item-start></ion-icon>
+                    Confirmar contraseña
+                </ion-label>
+                <ion-input
+                    color="secondary"
+                    type="password"
+                    formControlName="password"
+                ></ion-input>
+            </ion-item>
+            <p
+                ion-text
+                color="warning"
+                class="text08"
+                *ngIf="
+                    onRegisterForm.get('password').touched &&
+                    onRegisterForm.get('password').hasError('required')
+                "
+            >
+                <ion-text color="warning">
+                    Campo requerido
+                </ion-text>
+            </p>
+        </form>
+
+        <div margin-top>
+            <ion-button
+                icon-left
+                size="medium"
+                expand="full"
+                shape="round"
+                color="dark"
+                (click)="signUp()"
+                [disabled]="!onRegisterForm.valid"
+                tappable
+            >
+                <ion-icon name="log-in"></ion-icon>
+                Regístrate
+            </ion-button>
+        </div>
+
+        <!-- Other links -->
+        <div text-center margin-top>
+            <span (click)="goToLogin()" tappable>
+                <ion-text color="light">
+                    <strong>Ya tengo una cuenta!</strong>
+                </ion-text>
+            </span>
+        </div>
+    </div>
+</ion-content>
