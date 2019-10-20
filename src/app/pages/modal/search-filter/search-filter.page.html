@@ -1,0 +1,102 @@
+<ion-header>
+    <ion-toolbar color="tertiary">
+        <ion-buttons slot="start">
+            <ion-button color="tertiary" (click)="closeModal()">
+                <ion-icon name="close" color="light"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            Agregar registro
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <form class="list-form">
+        <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+                <ion-icon name="md-briefcase" item-start></ion-icon>
+                Miembro de iglesia
+            </ion-label>
+            <ion-select style="color: white;">
+                <ion-select-option value="t">David Alejandro</ion-select-option>
+                <ion-select-option value="m"
+                    >Bautista Valencia</ion-select-option
+                >
+            </ion-select>
+        </ion-item>
+        <p
+            ion-text
+            class="text08"
+            *ngIf="
+                onRegisterForm.get('charge').touched &&
+                onRegisterForm.get('charge').hasError('required')
+            "
+        >
+            <ion-text color="warning">
+                Campo requerido
+            </ion-text>
+        </p>
+
+        <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+                <ion-icon name="md-cash" item-start></ion-icon>
+                Diezmo
+            </ion-label>
+            <ion-input
+                color="secondary"
+                type="number"
+               
+            ></ion-input>
+        </ion-item>
+        <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+                <ion-icon name="md-cash" item-start></ion-icon>
+                Ofrenda
+            </ion-label>
+            <ion-input color="secondary" type="number"></ion-input>
+        </ion-item>
+        <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+                <ion-icon name="md-cash" item-start></ion-icon>
+                Cumpleaños
+            </ion-label>
+            <ion-input color="secondary" type="number"></ion-input>
+        </ion-item>
+        <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+                <ion-icon name="md-cash" item-start></ion-icon>
+                Primicias
+            </ion-label>
+            <ion-input color="secondary" type="number"></ion-input>
+        </ion-item>
+        <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+                <ion-icon name="md-cash" item-start></ion-icon>
+                Proyectos especiales
+            </ion-label>
+            <ion-input color="secondary" type="number"></ion-input>
+        </ion-item>
+        <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+                <ion-icon name="md-cash" item-start></ion-icon>
+                Fondo inversión
+            </ion-label>
+            <ion-input color="secondary" type="number"></ion-input>
+        </ion-item>
+    </form>
+
+    <div margin-top>
+        <ion-button
+            icon-left
+            size="medium"
+            expand="full"
+            shape="round"
+            color="tertiary"
+            (click)=" closeModal()"
+        >
+            <ion-icon name="log-in"></ion-icon>
+            Registrar
+        </ion-button>
+    </div>
+</ion-content>

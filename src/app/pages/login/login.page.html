@@ -1,0 +1,60 @@
+<ion-content padding class="animated fadeIn login auth-page">
+    <div class="theme-bg"></div>
+    <div class="auth-content">
+        <!-- Logo -->
+        <div padding-horizontal text-center class="animated fadeInDown">
+            <div class="logo"></div>
+            <h4 no-margin>
+                <ion-text color="light" class="fw700">
+                    <h1>Recursos7</h1>
+                </ion-text>
+            </h4>
+        </div>
+        <br /><br />
+        <!-- Login form -->
+        <div style="background-color: rgba(255, 255, 255, 0.404);width: 100%; border-radius: 20px; padding: 40px;">
+            <form [formGroup]="onLoginForm" >
+                <ion-item no-padding class="animated fadeInUp">
+                    <ion-label position="floating">
+                        <ion-icon name="md-person" item-start ></ion-icon>
+                        <span style="color: rgb(244, 244, 245); font-weight: bolder;"> &nbsp;&nbsp;Usuario</span>
+                    </ion-label>
+                    <ion-input type="text"  style="color: rgb(250, 248, 248);"></ion-input>
+                </ion-item>
+               
+
+                <ion-item no-padding class="animated fadeInUp">
+                    <ion-label position="floating">
+                        <ion-icon name="lock" item-start></ion-icon>
+                        <span style="color: rgb(245, 245, 245); font-weight: bolder;"> &nbsp;&nbsp;Contraseña</span>
+                    </ion-label>
+                    <ion-input  type="password" formControlName="password"></ion-input>
+                </ion-item>
+                
+            </form>
+            <br /><br /><br />
+            <div>
+                <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="goToHome()">
+                    <ion-icon name="log-in"></ion-icon>
+                    Iniciar sesión
+                </ion-button>
+
+                <p text-center>
+                    <ion-text color="light">
+                        <strong>O si aún no tienes cuenta</strong>
+                    </ion-text>
+                </p>
+            </div>
+
+            <!-- Other links -->
+            <div text-center margin-top>
+                <span (click)="goToRegister()" class="paz" tappable>
+                    <ion-text color="light">
+                        <strong>Regístrate</strong>
+                    </ion-text>
+                </span>
+            </div>
+        </div>
+
+    </div>
+</ion-content>

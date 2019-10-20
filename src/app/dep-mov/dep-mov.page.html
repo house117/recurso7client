@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-buttons slot="start">
+        <ion-button color="tertiary" (click)="close()">
+          <ion-icon name="md-arrow-back" color="light"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>
+        Realizar Movimiento
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <form class="list-form">
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="logo-buffer" item-start></ion-icon>
+          Departamento
+        </ion-label>
+        <ion-input color="secondary" type="text" value="Jóvenes" disabled="disabled"></ion-input>
+      </ion-item>
+  
+  
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="md-cash" item-start></ion-icon>
+          Monto
+        </ion-label>
+        <ion-input color="secondary" type="number"></ion-input>
+      </ion-item>
+  
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="md-card" item-start></ion-icon>
+          Tipo de Movimiento
+        </ion-label>
+        <ion-select>
+            <ion-select-option value="alta">Alta</ion-select-option>
+            <ion-select-option value="baja">Baja</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </form>
+  
+    <div margin-top>
+      <ion-button icon-left size="medium" expand="full" shape="round" color="tertiary" (click)=" close()">
+        <ion-icon name="log-in"></ion-icon>
+        Registrar
+      </ion-button>
+    </div>
+  </ion-content>
