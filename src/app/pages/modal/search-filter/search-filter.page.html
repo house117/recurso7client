@@ -1,7 +1,7 @@
 <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar color="tertiary">
         <ion-buttons slot="start">
-            <ion-button color="primary" (click)="closeModal()">
+            <ion-button color="tertiary" (click)="closeModal()">
                 <ion-icon name="close" color="light"></ion-icon>
             </ion-button>
         </ion-buttons>
@@ -43,11 +43,7 @@
                 <ion-icon name="md-cash" item-start></ion-icon>
                 Diezmo
             </ion-label>
-            <ion-input
-                color="secondary"
-                type="number"
-                formControlName="password"
-            ></ion-input>
+            <ion-input color="secondary" type="number"></ion-input>
         </ion-item>
         <ion-item no-padding class="animated fadeInUp">
             <ion-label position="floating">
@@ -92,13 +88,11 @@
             size="medium"
             expand="full"
             shape="round"
-            color="dark"
-            (click)="signUp()"
-            [disabled]="!onRegisterForm.valid"
-            tappable
+            color="tertiary"
+            (click)="closeModal()"
         >
             <ion-icon name="log-in"></ion-icon>
-            Regístrate
+            Registrar
         </ion-button>
     </div>
 </ion-content>

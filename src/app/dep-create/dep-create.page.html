@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-buttons slot="start">
+        <ion-button color="tertiary" (click)="closeModal()">
+          <ion-icon name="close" color="light"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>
+        Agregar Departamento
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <form class="list-form">
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="logo-buffer" item-start></ion-icon>
+          Nombre
+        </ion-label>
+        <ion-input color="secondary" type="text"></ion-input>
+      </ion-item>
+  
+  
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="md-podium" item-start></ion-icon>
+          % asignado
+        </ion-label>
+        <ion-input color="secondary" type="number"></ion-input>
+      </ion-item>
+  
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="md-cash" item-start></ion-icon>
+          Saldo
+        </ion-label>
+        <ion-input color="secondary" type="number" value="0.00" disabled="disabled"></ion-input>
+      </ion-item>
+    </form>
+  
+    <div margin-top>
+      <ion-button icon-left size="medium" expand="full" shape="round" color="tertiary" (click)=" closeModal()">
+        <ion-icon name="log-in"></ion-icon>
+        Crear
+      </ion-button>
+    </div>
+  </ion-content>

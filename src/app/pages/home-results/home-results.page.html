@@ -1,7 +1,7 @@
-<ion-header>
-    <ion-toolbar color="primary">
+<ion-header style="background-color: aqua;">
+    <ion-toolbar color="tertiary">
         <ion-buttons slot="start">
-            <ion-menu-button color="secondary"></ion-menu-button>
+            <ion-menu-button color="tertiaty"></ion-menu-button>
         </ion-buttons>
         <ion-title>
             <ion-text color="light">
@@ -12,66 +12,24 @@
         </ion-title>
     </ion-toolbar>
 
-    <ion-toolbar color="dark">
+    <ion-toolbar color="tertiary">
         <ion-searchbar
             [(ngModel)]="searchKey"
             placeholder="Buscar"
         ></ion-searchbar>
         <ion-buttons slot="end">
-            <ion-button
-                size="small"
-                shape="round"
-                color="medium"
-                (click)="searchFilter()"
-            >
-                <ion-icon name="options"></ion-icon>
+            <ion-button size="small" shape="round" color="medium">
+                <ion-icon name="md-search"></ion-icon>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <!--
-    <ion-card no-margin class="no-radius">
-        <ion-item lines="none" color="medium">
-            <ion-label>
-                <h2 no-margin class="fw500 no-margin">
-                    <ion-text color="dark">Alert / Toast test</ion-text>
-                </h2>
-
-                <p class="text-11x no-margin">
-                    <ion-text color="primary">{{ yourLocation }}</ion-text>
-                </p>
-            </ion-label>
-            <ion-button
-                shape="round"
-                fill="outline"
-                size="small"
-                color="primary"
-                (click)="alertLocation()"
-            >
-                Location
-                <ion-icon name="locate"></ion-icon>
-            </ion-button>
-        </ion-item>
-    </ion-card>
-
-    <ion-card class="bg-white">
-        <ion-img [src]="themeCover"></ion-img>
-        <ion-button
-            expand="full"
-            color="dark"
-            (click)="presentImage(themeCover)"
-            no-margin
-        >
-            Modal 1: Modal Image
-        </ion-button>
-    </ion-card>
--->
-    <h2>Registros</h2>
+    <h2>&nbsp;&nbsp;<ion-icon name="md-book"></ion-icon>&nbsp;Registros</h2>
     <ion-button
         margin
-        color="secondary"
+        color="tertiary"
         shape="round"
         (click)="searchFilter()"
         class="flotador"
@@ -85,14 +43,15 @@
                 <ion-label>David Bautista Valencia</ion-label>
             </ion-item>
             <ion-item-options side="end">
-                <ion-item-option (click)="unread(item)"
-                    ><ion-icon name="md-open"></ion-icon
-                ></ion-item-option>
+                <ion-item-option (click)="unread(item)">
+                    <ion-icon name="md-open"></ion-icon>
+                </ion-item-option>
                 <ion-item-option
                     style="background-color: rgb(216, 11, 11) !important; border-radius: 10%;"
                     (click)="unread(item)"
-                    ><ion-icon name="md-trash"></ion-icon
-                ></ion-item-option>
+                >
+                    <ion-icon name="md-trash"></ion-icon>
+                </ion-item-option>
             </ion-item-options>
         </ion-item-sliding>
 
@@ -101,15 +60,20 @@
                 <ion-label>José Luis Flores García</ion-label>
             </ion-item>
             <ion-item-options side="end">
-                <ion-item-option (click)="unread(item)"
-                    ><ion-icon name="md-open"></ion-icon
-                ></ion-item-option>
+                <ion-item-option
+                    (click)="info_register()"
+                    style="margin: 1%; background-color: rgb(11, 124, 216) !important; border-radius: 10%;  box-shadow: 10px 10px 8px 10px #888888;
+                "
+                >
+                    <ion-icon name="md-open"></ion-icon>
+                </ion-item-option>
                 <ion-item-option
                     style="margin: 1%; background-color: rgb(216, 11, 11) !important; border-radius: 10%;  box-shadow: 10px 10px 8px 10px #888888;
 "
-                    (click)="unread(item)"
-                    ><ion-icon name="md-trash"></ion-icon
-                ></ion-item-option>
+                    (click)="presentAlert()"
+                >
+                    <ion-icon name="md-trash"></ion-icon>
+                </ion-item-option>
             </ion-item-options>
         </ion-item-sliding>
     </ion-list>

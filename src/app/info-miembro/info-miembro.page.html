@@ -1,0 +1,87 @@
+<ion-header>
+    <ion-toolbar color="tertiary">
+        <ion-buttons slot="start">
+            <ion-button color="tertiary" (click)="close()">
+                <ion-icon name="close" color="light"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            Modificar Miembro
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <form class="list-form">
+        <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+                <ion-icon name="md-person" item-start></ion-icon>
+                Nombre
+            </ion-label>
+            <ion-input
+                color="secondary"
+                type="text"
+                name="nombre"
+                [(ngModel)]="nombre"
+                required
+            ></ion-input>
+        </ion-item>
+
+        <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+                <ion-icon name="md-person" item-start></ion-icon>
+                Apellidos
+            </ion-label>
+            <ion-input
+                color="secondary"
+                type="text"
+                name="apellidos"
+                [(ngModel)]="apellidos"
+                required
+            ></ion-input>
+        </ion-item>
+
+        <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+                <ion-icon name="md-cash" item-start></ion-icon>
+                Cargo
+            </ion-label>
+            <ion-select name="cargo" [(ngModel)]="cargo" required>
+                <ion-select-option value="Sec.Jovenes"
+                    >Secretario de Jóvenes</ion-select-option
+                >
+                <ion-select-option value="Dir.Mayordomía"
+                    >Director de Mayordomia</ion-select-option
+                >
+            </ion-select>
+        </ion-item>
+
+        <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+                <ion-icon name="md-mail" item-start></ion-icon>
+                Correo electrónico
+            </ion-label>
+            <ion-input
+                color="secondary"
+                type="email"
+                name="email"
+                [(ngModel)]="email"
+                required
+            ></ion-input>
+        </ion-item>
+    </form>
+
+    <div margin-top>
+        <ion-button
+            icon-left
+            size="medium"
+            expand="full"
+            shape="round"
+            color="tertiary"
+            (click)="updateUser()"
+        >
+            <ion-icon name="log-in"></ion-icon>
+            Modificar
+        </ion-button>
+    </div>
+</ion-content>

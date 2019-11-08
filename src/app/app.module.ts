@@ -15,10 +15,11 @@ import { AppRoutingModule } from "./app-routing.module";
 import { ImagePageModule } from "./pages/modal/image/image.module";
 import { SearchFilterPageModule } from "./pages/modal/search-filter/search-filter.module";
 import { LoginPageModule } from "./pages/login/login.module";
+import { MiembrosCreatePageModule } from "./miembros-create/miembros-create.module";
+import { DepCreatePageModule } from "./dep-create/dep-create.module";
 
 // Components
 import { NotificationsComponent } from "./components/notifications/notifications.component";
-
 @NgModule({
     declarations: [AppComponent, NotificationsComponent],
     imports: [
@@ -29,7 +30,9 @@ import { NotificationsComponent } from "./components/notifications/notifications
         HttpClientModule,
         ImagePageModule,
         SearchFilterPageModule,
-        LoginPageModule
+        LoginPageModule,
+        MiembrosCreatePageModule,
+        DepCreatePageModule
     ],
     entryComponents: [NotificationsComponent],
     providers: [

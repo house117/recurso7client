@@ -29,14 +29,14 @@ export class AppComponent {
             },
             {
                 title: "Miembros de iglesia",
-                url: "/about",
+                url: "/miembros-results",
                 direct: "forward",
                 icon: "md-people"
             },
 
             {
                 title: "Departamentos",
-                url: "/settings",
+                url: "/dep-results",
                 direct: "forward",
                 icon: "md-analytics"
             }

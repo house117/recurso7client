@@ -39,22 +39,6 @@ ion-item {
     background-color: var(--ion-color-tertiary);
 }
 
-.bg-profile {
-    background-image: linear-gradient(
-        135deg,
-        var(--ion-color-dark),
-        var(--ion-color-primary)
-    );
-}
-
-.bg-main {
-    background-image: linear-gradient(
-        -135deg,
-        var(--ion-color-medium),
-        var(--ion-color-light)
-    );
-}
-
 // Helpers //
 .w100 {
     width: 100%;
@@ -205,19 +189,6 @@ ion-card {
 }
 
 // Custom Menu styles (overriding Shadow DOM)
-ion-menu {
-    ion-header {
-        ion-toolbar {
-            &.ion-color-dark {
-                --ion-color-base: linear-gradient(
-                    135deg,
-                    var(--ion-color-dark),
-                    var(--ion-color-primary)
-                ) !important;
-            }
-        }
-    }
-}
 
 .mto {
     margin-top: 12px;

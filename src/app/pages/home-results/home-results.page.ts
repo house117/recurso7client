@@ -112,4 +112,17 @@ export class HomeResultsPage {
         });
         return await popover.present();
     }
+    info_register() {
+        this.navCtrl.navigateRoot("/info-register");
+    }
+
+    presentAlert() {
+        const alert = this.alertCtrl
+            .create({
+                message: "¿Seguro de eliminar este registro?",
+                subHeader: "Eliminar Registro",
+                buttons: ["Eliminar", "Cancelar"]
+            })
+            .then(alert => alert.present());
+    }
 }
