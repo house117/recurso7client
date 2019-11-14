@@ -92,7 +92,7 @@ export class InfoMiembroPage implements OnInit {
         this.http.post("http://localhost:5000/api/users/", data).subscribe(
             val => {
                 console.log("POST call successful value returned in body", val);
-                location.replace(document.referrer);
+                location.replace("/tabs/miembros-iglesia");
             },
             response => {
                 console.log("POST call in error", response);

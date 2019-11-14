@@ -1,0 +1,41 @@
+
+
+
+<ion-content padding>
+
+    <img src="/assets/img/usuario.png" class="image-user">
+
+
+    <ion-card>
+
+      <ion-item color="primary">
+        <ion-label class="titulo-center"><b>Iniciar Sesión</b></ion-label>
+      </ion-item>
+      
+      <ion-card-content>
+        <form #formulario="ngForm" (ngSubmit)="onSubmitTemplate()">
+          
+          <ion-item>
+            <ion-label position="floating" class="text-title">Usuario</ion-label>
+            <ion-input type="text" class="text-field" name="usuario" [(ngModel)]="usuario.usuario" required></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label position="floating" class="text-title">Contraseña</ion-label>
+            <ion-input type="password" class="text-field" name="password" [(ngModel)]="usuario.contrasena" required></ion-input>
+          </ion-item>
+          
+          <ion-button expand="full" type="submit" [disabled]="formulario.invalid" (click)="goMiembros()"> Ingresar </ion-button>
+        
+        </form>
+        
+      </ion-card-content>
+
+    </ion-card>
+
+
+   
+
+
+
+</ion-content>

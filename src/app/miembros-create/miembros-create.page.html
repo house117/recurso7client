@@ -1,87 +1,77 @@
 <ion-header>
-    <ion-toolbar color="tertiary">
-        <ion-buttons slot="start">
-            <ion-button color="tertiary" (click)="closeModal()">
-                <ion-icon name="close" color="light"></ion-icon>
-            </ion-button>
-        </ion-buttons>
-        <ion-title>
-            Agregar Miembro
-        </ion-title>
+    <ion-toolbar>
+   
+      <ion-buttons slot="start">
+        
+        <ion-button (click)="toggleMenu()">
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+  
+        <ion-menu-button color="primary"
+                         menu="primerMenu">
+        </ion-menu-button>
+  
+      </ion-buttons>
+   
+      <ion-title color="primary">Agregar miembros</ion-title>
+
+      <ion-buttons slot="end">
+      <ion-avatar>
+        <img src="/assets/img/addusuario.png">
+      </ion-avatar>
+      </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-    <form class="list-form">
-        <ion-item no-padding class="animated fadeInUp">
-            <ion-label position="floating">
-                <ion-icon name="md-person" item-start></ion-icon>
-                Nombre
-            </ion-label>
-            <ion-input
-                color="secondary"
-                type="text"
-                name="nombre"
-                [(ngModel)]="nombre"
-                required
-            ></ion-input>
-        </ion-item>
+    
 
-        <ion-item no-padding class="animated fadeInUp">
-            <ion-label position="floating">
-                <ion-icon name="md-person" item-start></ion-icon>
-                Apellidos
-            </ion-label>
-            <ion-input
-                color="secondary"
-                type="text"
-                name="apellidos"
-                [(ngModel)]="apellidos"
-                required
-            ></ion-input>
-        </ion-item>
+    <ion-card>
 
-        <ion-item no-padding class="animated fadeInUp">
-            <ion-label position="floating">
-                <ion-icon name="md-cash" item-start></ion-icon>
-                Cargo
-            </ion-label>
-            <ion-select name="cargo" [(ngModel)]="cargo" required>
-                <ion-select-option value="Sec.Jovenes"
-                    >Secretario de Jóvenes</ion-select-option
-                >
-                <ion-select-option value="Dir.Mayordomía"
-                    >Director de Mayordomia</ion-select-option
-                >
-            </ion-select>
-        </ion-item>
+            <ion-item color="danger">
+              <ion-label class="titulo-center"><b>Datos del miembro</b></ion-label>
+            </ion-item>
+            
+            <ion-card-content>
+              <form>
+                
+                <ion-item>
+                  <ion-label position="floating" class="text-title">
+                    <ion-icon name="person" item-start></ion-icon>&nbsp;Nombre
+                  </ion-label>
+                  <ion-input type="text" class="text-field" name="nombre"  [(ngModel)]="nombre" required></ion-input>
+                </ion-item>
+            
+                <ion-item>
+                  <ion-label position="floating" class="text-title">
+                    <ion-icon name="person" item-start></ion-icon>&nbsp;Apellidos
+                  </ion-label>
+                  <ion-input type="text" class="text-field" name="apellidos" [(ngModel)]="apellidos" required></ion-input>
+                </ion-item>
 
-        <ion-item no-padding class="animated fadeInUp">
-            <ion-label position="floating">
-                <ion-icon name="md-mail" item-start></ion-icon>
-                Correo electrónico
-            </ion-label>
-            <ion-input
-                color="secondary"
-                type="email"
-                name="email"
-                [(ngModel)]="email"
-                required
-            ></ion-input>
-        </ion-item>
-    </form>
+                
+                <ion-item>
+                    <ion-label position="floating" class="text-title">
+                        <ion-icon name="cash" item-start></ion-icon>&nbsp;Cargo
+                    </ion-label>
+                    <ion-select name="cargo" [(ngModel)]="cargo" class="text-field" required>
+                        <ion-select-option value="Sec.Jovenes">Secretario de Jóvenes</ion-select-option>
+                        <ion-select-option value="Dir.Mayordomía">Director de Mayordomia</ion-select-option>
+                    </ion-select>
+                </ion-item>
 
-    <div margin-top>
-        <ion-button
-            icon-left
-            size="medium"
-            expand="full"
-            shape="round"
-            color="tertiary"
-            (click)="createUser()"
-        >
-            <ion-icon name="log-in"></ion-icon>
-            Crear
-        </ion-button>
-    </div>
+                <ion-item>
+                    <ion-label position="floating" class="text-title">
+                        <ion-icon name="mail" item-start></ion-icon>&nbsp;Email
+                    </ion-label>
+                    <ion-input type="email" class="text-field" name="email" [(ngModel)]="email" required></ion-input>
+                </ion-item>
+
+                <ion-button expand="full" (click)="createUser()"> Crear </ion-button>
+              
+              </form>
+              
+            </ion-card-content>
+      
+    </ion-card>
 </ion-content>

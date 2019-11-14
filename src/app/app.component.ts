@@ -23,13 +23,13 @@ export class AppComponent {
         this.appPages = [
             {
                 title: "Diezmos y ofrendas",
-                url: "/home-results",
+                url: "/tabs-o/home-results",
                 direct: "root",
                 icon: "logo-usd"
             },
             {
                 title: "Miembros de iglesia",
-                url: "/miembros-results",
+                url: "/tabs/miembros-iglesia",
                 direct: "forward",
                 icon: "md-people"
             },

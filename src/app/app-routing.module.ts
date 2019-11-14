@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { PreloadAllModules, Routes, RouterModule } from "@angular/router";
 
 const routes: Routes = [
-    { path: "", loadChildren: "./pages/login/login.module#LoginPageModule" },
+    { path: "", loadChildren: "./inicio/inicio.module#InicioPageModule" },
     {
         path: "register",
         loadChildren: "./pages/register/register.module#RegisterPageModule"
@@ -64,7 +64,14 @@ const routes: Routes = [
     {
         path: "dep-mov",
         loadChildren: "./dep-mov/dep-mov.module#DepMovPageModule"
-    }
+    },
+  { path: 'inicio', loadChildren: './inicio/inicio.module#InicioPageModule' },  { path: 'ingreso', loadChildren: './ingreso/ingreso.module#IngresoPageModule' },
+  { path: 'miembros-iglesia', loadChildren: './miembros-iglesia/miembros-iglesia.module#MiembrosIglesiaPageModule' },
+  { path: 'tabs', loadChildren: './tabs/tabs.module#TabsPageModule' },
+  { path: 'tabs-o', loadChildren: './tabs-o/tabs-o.module#TabsOPageModule' },
+  { path: 'conteos-create', loadChildren: './conteos-create/conteos-create.module#ConteosCreatePageModule' }
+
+
 ];
 
 @NgModule({

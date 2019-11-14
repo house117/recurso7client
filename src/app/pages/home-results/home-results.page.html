@@ -1,80 +1,87 @@
-<ion-header style="background-color: aqua;">
-    <ion-toolbar color="tertiary">
-        <ion-buttons slot="start">
-            <ion-menu-button color="tertiaty"></ion-menu-button>
-        </ion-buttons>
-        <ion-title>
-            <ion-text color="light">
-                <ion-text color="light" class="fw700"
-                    >Diezmos y ofrendas</ion-text
-                >
-            </ion-text>
-        </ion-title>
-    </ion-toolbar>
+<ion-header>
 
-    <ion-toolbar color="tertiary">
-        <ion-searchbar
-            [(ngModel)]="searchKey"
-            placeholder="Buscar"
-        ></ion-searchbar>
-        <ion-buttons slot="end">
-            <ion-button size="small" shape="round" color="medium">
-                <ion-icon name="md-search"></ion-icon>
+
+    <ion-toolbar>
+        <ion-buttons slot="start">
+
+            <ion-button (click)="toggleMenu()" color="dark">
+                <ion-icon slot="icon-only" name="menu"></ion-icon>
             </ion-button>
+
+            <ion-menu-button color="dark" menu="primerMenu">
+            </ion-menu-button>
+
+        </ion-buttons>
+
+
+        <ion-title color="tertiary">Conteo de Ofrendas</ion-title>
+
+        <ion-buttons slot="end">
+            <ion-avatar>
+                <img src="/assets/img/ofrendas.png">
+            </ion-avatar>
         </ion-buttons>
     </ion-toolbar>
+    <ion-searchbar animated (ionChange)="buscar( $event )">
+    </ion-searchbar>
 </ion-header>
 
-<ion-content>
-    <h2>&nbsp;&nbsp;<ion-icon name="md-book"></ion-icon>&nbsp;Registros</h2>
-    <ion-button
-        margin
-        color="tertiary"
-        shape="round"
-        (click)="searchFilter()"
-        class="flotador"
-    >
-        <ion-icon name="md-add"></ion-icon>
-    </ion-button>
+<ion-content padding>
 
-    <ion-list>
-        <ion-item-sliding>
+    <ion-list #lista>
+
+        <ion-item-sliding *ngFor="let con of conteo  | filtro: textoBuscar: 'nombre'">
+
             <ion-item>
-                <ion-label>David Bautista Valencia</ion-label>
-            </ion-item>
-            <ion-item-options side="end">
-                <ion-item-option (click)="unread(item)">
-                    <ion-icon name="md-open"></ion-icon>
+                <ion-label>
+                  
+                  <h3>{{ con.nombre }}</h3>
+                  <p>
+                    <span style="font-size: small; font-weight: bolder;">Diezmo: ${{ con.diezmo }} - Ofrenda: ${{ con.diezmo }}</span>
+                  </p>
+                </ion-label>
+          
+                <ion-label slot="end" text-right>
+                  <span style="font-size: small; font-weight: bolder;"></span>
+                </ion-label>
+          
+              </ion-item>
+
+            <ion-item-options side="start">
+                <!-- <ion-item-option (click)="favorite(item)">Favorite</ion-item-option> -->
+                <!-- <ion-item-option color="danger" (click)="share(item)">Share</ion-item-option> -->
+
+                <ion-item-option (click)="favorite(con)">
+                    <ion-icon slot="icon-only" name="heart"></ion-icon>
                 </ion-item-option>
-                <ion-item-option
-                    style="background-color: rgb(216, 11, 11) !important; border-radius: 10%;"
-                    (click)="unread(item)"
-                >
-                    <ion-icon name="md-trash"></ion-icon>
+                <ion-item-option color="secondary" (click)="info_register(con)">
+                    <ion-icon slot="icon-only" name="information-circle"></ion-icon>
                 </ion-item-option>
+
             </ion-item-options>
+
+            <ion-item-options side="end">
+
+                <ion-item-option color="danger" (click)="borrar(con)">
+                    <ion-icon slot="icon-only" name="trash"></ion-icon>
+                </ion-item-option>
+
+            </ion-item-options>
+
+
         </ion-item-sliding>
 
-        <ion-item-sliding>
-            <ion-item>
-                <ion-label>José Luis Flores García</ion-label>
-            </ion-item>
-            <ion-item-options side="end">
-                <ion-item-option
-                    (click)="info_register()"
-                    style="margin: 1%; background-color: rgb(11, 124, 216) !important; border-radius: 10%;  box-shadow: 10px 10px 8px 10px #888888;
-                "
-                >
-                    <ion-icon name="md-open"></ion-icon>
-                </ion-item-option>
-                <ion-item-option
-                    style="margin: 1%; background-color: rgb(216, 11, 11) !important; border-radius: 10%;  box-shadow: 10px 10px 8px 10px #888888;
-"
-                    (click)="presentAlert()"
-                >
-                    <ion-icon name="md-trash"></ion-icon>
-                </ion-item-option>
-            </ion-item-options>
-        </ion-item-sliding>
     </ion-list>
+
+    
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar color="google">
+        <ion-button expand="full" 
+        color="warning"
+        (click)="presentActionSheet()">
+        Mostrar totales
+        </ion-button>
+    </ion-toolbar>
+  </ion-footer>

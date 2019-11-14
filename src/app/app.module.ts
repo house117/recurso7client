@@ -20,6 +20,8 @@ import { DepCreatePageModule } from "./dep-create/dep-create.module";
 
 // Components
 import { NotificationsComponent } from "./components/notifications/notifications.component";
+import { PipesModule } from './pipes/pipes.module';
+
 @NgModule({
     declarations: [AppComponent, NotificationsComponent],
     imports: [
@@ -31,6 +33,7 @@ import { NotificationsComponent } from "./components/notifications/notifications
         ImagePageModule,
         SearchFilterPageModule,
         LoginPageModule,
+        PipesModule,
         MiembrosCreatePageModule,
         DepCreatePageModule
     ],

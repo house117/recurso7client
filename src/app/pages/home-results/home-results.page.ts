@@ -1,4 +1,13 @@
-import { Component } from "@angular/core";
+import { ActionSheetController } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs';
+import { IonList } from '@ionic/angular';
+import { NgModel } from "@angular/forms";
+import { ActivatedRoute, NavigationExtras } from "@angular/router";
+import { HttpParams } from "@angular/common/http";
+import { Router } from "@angular/router";
+import { IonInfiniteScroll } from '@ionic/angular';
 import {
     NavController,
     AlertController,
@@ -8,121 +17,211 @@ import {
     ModalController
 } from "@ionic/angular";
 
-// Modals
-import { LoginPage } from "../../pages/login/login.page";
-import { SearchFilterPage } from "../../pages/modal/search-filter/search-filter.page";
-
-import { ImagePage } from "./../modal/image/image.page";
-// Call notifications test by Popover and Custom Component.
-import { NotificationsComponent } from "./../../components/notifications/notifications.component";
-
 @Component({
     selector: "app-home-results",
     templateUrl: "./home-results.page.html",
     styleUrls: ["./home-results.page.scss"]
 })
-export class HomeResultsPage {
-    searchKey = "";
-    yourLocation = "123 Test Street";
-    themeCover = "assets/img/ionic4-Start-Theme-cover.jpg";
+export class HomeResultsPage implements OnInit{
+   
 
-    constructor(
-        public navCtrl: NavController,
-        public menuCtrl: MenuController,
-        public popoverCtrl: PopoverController,
-        public alertCtrl: AlertController,
-        public modalCtrl: ModalController,
-        public toastCtrl: ToastController
+  @ViewChild('lista') lista: IonList;
+  conteo: any;
+  url = "http://localhost:5000/api/conteo/";
+
+  constructor(
+    private actionSheetCtrl: ActionSheetController,
+    private menuCtrl: MenuController, 
+    private toastCtrl: ToastController,
+    private http: HttpClient,
+    public navCtrl: NavController,
+    public popoverCtrl: PopoverController,
+    public alertCtrl: AlertController,
+    public modalCtrl: ModalController,
+    private activatedRoute: ActivatedRoute,
+    private router: Router 
     ) {}
 
-    ionViewWillEnter() {
-        this.menuCtrl.enable(true);
-    }
 
-    settings() {
-        this.navCtrl.navigateForward("settings");
-    }
+  ngOnInit() {
+    //this.usuarios = this.getUsers();
+    this.http.get(`http://localhost:5000/api/conteo/`).subscribe(res => {
+            this.conteo = res;
+            console.log(this.conteo);
+    });
+  }
+  async presentToast( message: string) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 2000
+    });
+    toast.present();
+  }
 
-    async alertLocation() {
-        const changeLocation = await this.alertCtrl.create({
-            header: "Change Location",
-            message: "Type your Address.",
-            inputs: [
-                {
-                    name: "location",
-                    placeholder: "Enter your new Location",
-                    type: "text"
-                }
-            ],
-            buttons: [
-                {
-                    text: "Cancel",
-                    handler: data => {
-                        console.log("Cancel clicked");
-                    }
-                },
-                {
-                    text: "Change",
-                    handler: async data => {
-                        console.log("Change clicked", data);
-                        this.yourLocation = data.location;
-                        const toast = await this.toastCtrl.create({
-                            message: "Location was change successfully",
-                            duration: 3000,
-                            position: "top",
-                            closeButtonText: "OK",
-                            showCloseButton: true
-                        });
 
-                        toast.present();
-                    }
-                }
-            ]
+  favorite( conteo ) {
+    // console.log('favorite', user);
+    this.presentToast('Guardó en favoritos');
+    this.lista.closeSlidingItems();
+  }
+
+
+  share( conteo ) {
+    this.presentToast('Información!');
+    this.lista.closeSlidingItems();
+    this.info_register(conteo);
+  }
+
+  async borrar( conteo ) {
+    
+    const alert = await this.alertCtrl.create({
+      header: "Confirmación",
+      message: "¿Deseas <stong>eliminar</strong> este registro?",
+      buttons: [
+          {
+              text: "Cancelar",
+              role: "cancel",
+              cssClass: "secondary",
+              handler: blah => {
+                  console.log("Confirm Cancel: Cancelar");
+              }
+          },
+          {
+              text: "Eliminar",
+              handler: () => {
+                  console.log("ENTRO A HANDLER");
+                  this.deleteConteo(conteo);
+                  this.presentToast('Borrado!');
+                  this.lista.closeSlidingItems();
+              }
+          }
+      ]
+    });
+    await alert.present();
+  }
+  deleteConteo(conteo) {
+    console.log("Función eliminar ...");
+    this.http.delete(this.url + conteo._id).subscribe(
+        val => {
+            console.log(
+                "DELETE call successful value returned in body",
+                val
+            );
+        },
+        response => {
+            console.log("DELETE call in error", response);
+        },
+        () => {
+            console.log("The DELETE observable is now completed.");
+            this.http.get(`http://localhost:5000/api/conteo/`).subscribe(res => {
+            this.conteo = res;
+            console.log(this.conteo);
+    });
+          }
+    );
+    //location.replace(document.referrer);
+    
+  }
+  toggleMenu() {
+    this.menuCtrl.toggle();
+  } 
+  info_register(conteo) {
+    //this.navCtrl.navigateForward(InfoMiembro, { id: usuario._id });
+    let navigationExtras: NavigationExtras = {
+        state: {
+            conteo: conteo
+        }
+    };
+    this.router.navigate(["info-register"], navigationExtras);
+  }
+
+  textoBuscar = "";
+  buscar( event ) {
+    // console.log(event);
+    this.textoBuscar = event.detail.value;
+  }
+
+   diezmo = 123.67;
+   ofrenda = 23.50;
+   primicia = 12.00;
+   inversion = 0.00;
+   cumpleaños = 0.00;
+   agradecimientos = 34.50;
+   otros = 0.00;
+   total = this.diezmo + this.ofrenda + this.primicia + this.inversion + this.cumpleaños + this.agradecimientos + this.otros;
+
+    
+    async presentActionSheet() {
+        const actionSheet = await this.actionSheetCtrl.create({
+          header: 'Subtotales',
+          backdropDismiss: false,
+          buttons: [{
+            text: 'Diezmo = $'+ this.diezmo,
+            role: 'destructive',
+            icon: 'logo-usd',
+            handler: () => {
+              console.log('Diezmo subtotal');
+            }
+          }, {
+            text: 'Ofrenda = $'+this.ofrenda,
+            icon: 'logo-usd',
+            handler: () => {
+              console.log('Share clicked');
+            }
+          }, {
+            text: 'Primicias = $'+this.primicia,
+            icon: 'logo-usd',
+            handler: () => {
+              console.log('Play clicked');
+            }
+          }, {
+            text: 'Inversion = $'+this.inversion,
+            icon: 'logo-usd',
+            handler: () => {
+              console.log('Favorite clicked');
+            }
+          },{
+            text: 'Cumpleaños = $'+this.cumpleaños,
+            icon: 'logo-usd',
+            handler: () => {
+              console.log('Play clicked');
+            }
+          },{
+            text: 'Agradecimientos = $'+this.agradecimientos,
+            icon: 'logo-usd',
+            handler: () => {
+              console.log('Play clicked');
+            }
+          },{
+            text: 'Otros = $'+this.otros,
+            icon: 'logo-usd',
+            handler: () => {
+              console.log('Play clicked');
+            }
+          },{
+            text: 'TOTAL = $'+this.total,
+            role: 'destructive',
+            icon: 'cash',
+            cssClass: 'rojo',
+            handler: () => {
+              console.log('Play clicked');
+            }
+          },{
+            text: 'Cerrar',
+            icon: 'close',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          }
+        ]
         });
-        changeLocation.present();
+    
+        await actionSheet.present();
     }
 
-    async searchFilter() {
-        const modal = await this.modalCtrl.create({
-            component: SearchFilterPage
-        });
-        return await modal.present();
-    }
-    async loginModal() {
-        const modal = await this.modalCtrl.create({
-            component: LoginPage
-        });
-        return await modal.present();
-    }
+    
+    
 
-    async presentImage(image: any) {
-        const modal = await this.modalCtrl.create({
-            component: ImagePage,
-            componentProps: { value: image }
-        });
-        return await modal.present();
-    }
 
-    async notifications(ev: any) {
-        const popover = await this.popoverCtrl.create({
-            component: NotificationsComponent,
-            event: ev,
-            animated: true,
-            showBackdrop: true
-        });
-        return await popover.present();
-    }
-    info_register() {
-        this.navCtrl.navigateRoot("/info-register");
-    }
-
-    presentAlert() {
-        const alert = this.alertCtrl
-            .create({
-                message: "¿Seguro de eliminar este registro?",
-                subHeader: "Eliminar Registro",
-                buttons: ["Eliminar", "Cancelar"]
-            })
-            .then(alert => alert.present());
-    }
 }

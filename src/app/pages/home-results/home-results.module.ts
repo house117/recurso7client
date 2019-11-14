@@ -7,6 +7,7 @@ import { AlertController } from "@ionic/angular";
 import { PopmenuComponent } from "./../../components/popmenu/popmenu.component";
 
 import { HomeResultsPage } from "./home-results.page";
+import { PipesModule } from '../../pipes/pipes.module';
 
 const routes: Routes = [
     {
@@ -19,6 +20,7 @@ const routes: Routes = [
     imports: [
         CommonModule,
         FormsModule,
+        PipesModule,
         ReactiveFormsModule,
         IonicModule,
         RouterModule.forChild(routes)

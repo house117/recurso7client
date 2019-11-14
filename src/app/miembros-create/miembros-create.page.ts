@@ -2,11 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { ModalController } from "@ionic/angular";
 import { NgModel } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
-
+import { MenuController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { HttpParams } from "@angular/common/http";
 import { Router } from "@angular/router";
-
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 @Component({
     selector: "app-miembros-create",
     templateUrl: "./miembros-create.page.html",
@@ -18,11 +18,15 @@ export class MiembrosCreatePage implements OnInit {
     apellidos: string;
     cargo: string;
     email: string;
+
+    
+
     constructor(
         private activatedRoute: ActivatedRoute,
         private modalCtrl: ModalController,
         private http: HttpClient,
-        private router: Router
+        private router: Router,
+        private menuCtrl: MenuController
     ) {}
     ngOnInit() {
         //let id = this.activatedRoute.snapshot.paramMap.get("id");
@@ -62,7 +66,8 @@ export class MiembrosCreatePage implements OnInit {
         this.http.post("http://localhost:5000/api/users/", data).subscribe(
             val => {
                 console.log("POST call successful value returned in body", val);
-                window.location.reload();
+                location.replace("/tabs/miembros-iglesia");
+                
             },
             response => {
                 console.log("POST call in error", response);
@@ -72,4 +77,8 @@ export class MiembrosCreatePage implements OnInit {
             }
         );
     }
+    toggleMenu() {
+        this.menuCtrl.toggle();
+    }
+    
 }
