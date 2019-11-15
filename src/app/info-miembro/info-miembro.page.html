@@ -1,52 +1,76 @@
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button color="primary" defaultHref="/tabs/miembros-iglesia"></ion-back-button>
+            <ion-back-button
+                color="primary"
+                defaultHref="/tabs/miembros-iglesia"
+            ></ion-back-button>
         </ion-buttons>
-             
+
         <ion-title color="primary">Datos del Miembro</ion-title>
-        
-            <ion-buttons slot="end">
+
+        <ion-buttons slot="end">
             <ion-avatar>
-                <img src="/assets/img/infoUsuario.png">
+                <img src="/assets/img/infoUsuario.png" />
             </ion-avatar>
-            </ion-buttons>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
- 
+
 <ion-content padding>
-    
     <ion-card>
+        <ion-item color="success">
+            <ion-label class="titulo-center"
+                ><b>Información del miembro</b></ion-label
+            >
+        </ion-item>
 
-            <ion-item color="success">
-              <ion-label class="titulo-center"><b>Información del miembro</b></ion-label>
-            </ion-item>
-            
-            <ion-card-content>
-              <form>
-                
+        <ion-card-content>
+            <form>
                 <ion-item>
-                  <ion-label position="floating" class="text-title">
-                    <ion-icon name="person" item-start></ion-icon>&nbsp;Nombre
-                  </ion-label>
-                  <ion-input type="text" class="text-field" name="nombre"  [(ngModel)]="nombre" required></ion-input>
-                </ion-item>
-            
-                <ion-item>
-                  <ion-label position="floating" class="text-title">
-                    <ion-icon name="person" item-start></ion-icon>&nbsp;Apellidos
-                  </ion-label>
-                  <ion-input type="text" class="text-field" name="apellidos" [(ngModel)]="apellidos" required></ion-input>
+                    <ion-label position="floating" class="text-title">
+                        <ion-icon name="person" item-start></ion-icon
+                        >&nbsp;Nombre
+                    </ion-label>
+                    <ion-input
+                        type="text"
+                        class="text-field"
+                        name="nombre"
+                        [(ngModel)]="nombre"
+                        required
+                    ></ion-input>
                 </ion-item>
 
-                
+                <ion-item>
+                    <ion-label position="floating" class="text-title">
+                        <ion-icon name="person" item-start></ion-icon
+                        >&nbsp;Apellidos
+                    </ion-label>
+                    <ion-input
+                        type="text"
+                        class="text-field"
+                        name="apellidos"
+                        [(ngModel)]="apellidos"
+                        required
+                    ></ion-input>
+                </ion-item>
+
                 <ion-item>
                     <ion-label position="floating" class="text-title">
                         <ion-icon name="cash" item-start></ion-icon>&nbsp;Cargo
                     </ion-label>
-                    <ion-select name="cargo" [(ngModel)]="cargo" class="text-field" required>
-                        <ion-select-option value="Sec.Jovenes">Secretario de Jóvenes</ion-select-option>
-                        <ion-select-option value="Dir.Mayordomía">Director de Mayordomia</ion-select-option>
+                    <ion-select
+                        name="cargo"
+                        [(ngModel)]="cargo"
+                        class="text-field"
+                        required
+                    >
+                        <ion-select-option value="Sec.Jovenes"
+                            >Secretario de Jóvenes</ion-select-option
+                        >
+                        <ion-select-option value="Dir.Mayordomía"
+                            >Director de Mayordomia</ion-select-option
+                        >
                     </ion-select>
                 </ion-item>
 
@@ -54,14 +78,19 @@
                     <ion-label position="floating" class="text-title">
                         <ion-icon name="mail" item-start></ion-icon>&nbsp;Email
                     </ion-label>
-                    <ion-input type="email" class="text-field" name="email" [(ngModel)]="email" required></ion-input>
+                    <ion-input
+                        type="email"
+                        class="text-field"
+                        name="email"
+                        [(ngModel)]="email"
+                        required
+                    ></ion-input>
                 </ion-item>
 
-                <ion-button expand="full" (click)="updateUser()"> Actualizar </ion-button>
-              
-              </form>
-              
-            </ion-card-content>
-      
+                <ion-button expand="full" (click)="updateUser()">
+                    Actualizar
+                </ion-button>
+            </form>
+        </ion-card-content>
     </ion-card>
 </ion-content>

@@ -1,101 +1,146 @@
 <ion-header>
-  <ion-toolbar>
- 
-    <ion-buttons slot="start">
-      
-      <ion-button (click)="toggleMenu()">
-        <ion-icon slot="icon-only" name="menu"></ion-icon>
-      </ion-button>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button (click)="toggleMenu()">
+                <ion-icon slot="icon-only" name="menu"></ion-icon>
+            </ion-button>
 
-      <ion-menu-button color="primary"
-                       menu="primerMenu">
-      </ion-menu-button>
+            <ion-menu-button color="primary" menu="primerMenu">
+            </ion-menu-button>
+        </ion-buttons>
 
-    </ion-buttons>
- 
-    <ion-title color="tertiary">Agregar Registro</ion-title>
+        <ion-title color="tertiary">Agregar Registro</ion-title>
 
-    <ion-buttons slot="end">
-    <ion-avatar>
-      <img src="/assets/img/registroadd.png">
-    </ion-avatar>
-    </ion-buttons>
-  </ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-avatar>
+                <img src="/assets/img/registroadd.png" />
+            </ion-avatar>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
-
 <ion-content padding>
-  <ion-card>
-
-    <ion-item color="warning">
-      <ion-label class="titulo-center"><b>Datos del registro</b></ion-label>
-    </ion-item>
-    
-    <ion-card-content>
-      <form>
-        
-        <ion-item>
-          <ion-label position="floating" class="text-title">
-            <ion-icon name="person" item-start></ion-icon>&nbsp;Nombre
-          </ion-label>
-          <ion-input type="text" class="text-field" name="nombre"  [(ngModel)]="nombre" required></ion-input>
-        </ion-item>
-    
-        <ion-item>
-          <ion-label position="floating" class="text-title">
-            <ion-icon name="cash" item-start></ion-icon>&nbsp;Diezmo
-          </ion-label>
-          <ion-input type="number" class="text-field" name="diezmo" [(ngModel)]="diezmo"></ion-input>
+    <ion-card>
+        <ion-item color="warning">
+            <ion-label class="titulo-center"
+                ><b>Datos del registro</b></ion-label
+            >
         </ion-item>
 
-        
-        <ion-item>
-            <ion-label position="floating" class="text-title">
-                <ion-icon name="cash" item-start></ion-icon>&nbsp;Ofrenda
-            </ion-label>
-            <ion-input type="number" class="text-field" name="ofrenda" [(ngModel)]="ofrenda"></ion-input>
-        </ion-item>
+        <ion-card-content>
+            <form>
+                <ion-item>
+                    <ion-label position="floating" class="text-title">
+                        <ion-icon name="person" item-start></ion-icon
+                        >&nbsp;Nombre
+                    </ion-label>
+                    <ion-select [(ngModel)]="iduser" name="iduser">
+                        <ion-select-option
+                            *ngFor="let user of usuarios"
+                            [value]="user._id"
+                            >{{user.nombre}}
+                            {{user.apellidos}}</ion-select-option
+                        >
+                    </ion-select>
+                </ion-item>
 
-        <ion-item>
-            <ion-label position="floating" class="text-title">
-                <ion-icon name="cash" item-start></ion-icon>&nbsp;Primicias
-            </ion-label>
-            <ion-input type="number" class="text-field" name="primicia" [(ngModel)]="primicia" ></ion-input>
-        </ion-item>
+                <ion-item>
+                    <ion-label position="floating" class="text-title">
+                        <ion-icon name="cash" item-start></ion-icon>&nbsp;Diezmo
+                    </ion-label>
+                    <ion-input
+                        type="number"
+                        class="text-field"
+                        name="diezmo"
+                        [(ngModel)]="diezmo"
+                    ></ion-input>
+                </ion-item>
 
-        <ion-item>
-          <ion-label position="floating" class="text-title">
-              <ion-icon name="cash" item-start></ion-icon>&nbsp;Inversion
-          </ion-label>
-          <ion-input type="number" class="text-field" name="inversion" [(ngModel)]="inversion" ></ion-input>
-        </ion-item>
+                <ion-item>
+                    <ion-label position="floating" class="text-title">
+                        <ion-icon name="cash" item-start></ion-icon
+                        >&nbsp;Ofrenda
+                    </ion-label>
+                    <ion-input
+                        type="number"
+                        class="text-field"
+                        name="ofrenda"
+                        [(ngModel)]="ofrenda"
+                    ></ion-input>
+                </ion-item>
 
-        <ion-item>
-          <ion-label position="floating" class="text-title">
-              <ion-icon name="cash" item-start></ion-icon>&nbsp;Cumpleaños
-          </ion-label>
-          <ion-input type="number" class="text-field" name="cumpleanios" [(ngModel)]="cumpleanios" ></ion-input>
-        </ion-item>
+                <ion-item>
+                    <ion-label position="floating" class="text-title">
+                        <ion-icon name="cash" item-start></ion-icon
+                        >&nbsp;Primicias
+                    </ion-label>
+                    <ion-input
+                        type="number"
+                        class="text-field"
+                        name="primicia"
+                        [(ngModel)]="primicia"
+                    ></ion-input>
+                </ion-item>
 
-        <ion-item>
-          <ion-label position="floating" class="text-title">
-              <ion-icon name="cash" item-start></ion-icon>&nbsp;Agradecimiento
-          </ion-label>
-          <ion-input type="number" class="text-field" name="agradecimiento" [(ngModel)]="agradecimiento" ></ion-input>
-        </ion-item>
+                <ion-item>
+                    <ion-label position="floating" class="text-title">
+                        <ion-icon name="cash" item-start></ion-icon
+                        >&nbsp;Inversion
+                    </ion-label>
+                    <ion-input
+                        type="number"
+                        class="text-field"
+                        name="inversion"
+                        [(ngModel)]="inversion"
+                    ></ion-input>
+                </ion-item>
 
-        <ion-item>
-          <ion-label position="floating" class="text-title">
-              <ion-icon name="cash" item-start></ion-icon>&nbsp;Otros
-          </ion-label>
-          <ion-input type="number" class="text-field" name="otro" [(ngModel)]="otro" ></ion-input>
-        </ion-item>
+                <ion-item>
+                    <ion-label position="floating" class="text-title">
+                        <ion-icon name="cash" item-start></ion-icon
+                        >&nbsp;Cumpleaños
+                    </ion-label>
+                    <ion-input
+                        type="number"
+                        class="text-field"
+                        name="cumpleanios"
+                        [(ngModel)]="cumpleanios"
+                    ></ion-input>
+                </ion-item>
 
-        <ion-button expand="full" (click)="createRegistro()" color="warning"> Crear </ion-button>
-      
-      </form>
-      
-    </ion-card-content>
+                <ion-item>
+                    <ion-label position="floating" class="text-title">
+                        <ion-icon name="cash" item-start></ion-icon
+                        >&nbsp;Agradecimiento
+                    </ion-label>
+                    <ion-input
+                        type="number"
+                        class="text-field"
+                        name="agradecimiento"
+                        [(ngModel)]="agradecimiento"
+                    ></ion-input>
+                </ion-item>
 
-  </ion-card> 
+                <ion-item>
+                    <ion-label position="floating" class="text-title">
+                        <ion-icon name="cash" item-start></ion-icon>&nbsp;Otros
+                    </ion-label>
+                    <ion-input
+                        type="number"
+                        class="text-field"
+                        name="otro"
+                        [(ngModel)]="otro"
+                    ></ion-input>
+                </ion-item>
+
+                <ion-button
+                    expand="full"
+                    (click)="createRegistro()"
+                    color="warning"
+                >
+                    Crear
+                </ion-button>
+            </form>
+        </ion-card-content>
+    </ion-card>
 </ion-content>

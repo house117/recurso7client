@@ -21,6 +21,7 @@ export class InfoMiembroPage implements OnInit {
     usuario: any;
     url = "http://localhost:5000/api/users/";
 
+    _id: string;
     nombre: string;
     apellidos: string;
     cargo: string;
@@ -54,10 +55,11 @@ export class InfoMiembroPage implements OnInit {
         this.cargo = this.usuario.cargo;
         this.email = this.usuario.email;
         this.http
-            .get(`http://localhost:5000/api/users/${this.id}`)
+            .get(`http://localhost:5000/api/users/${this.usuario._id}`)
             .subscribe(res => {
-                this.usuario = res;
-                this.nombre = this.usuario.nombre;
+                (this.usuario = res),
+                    (this._id = this.usuario._id),
+                    (this.nombre = this.usuario.nombre);
                 this.apellidos = this.usuario.apellidos;
                 this.cargo = this.usuario.cargo;
                 this.email = this.usuario.email;
