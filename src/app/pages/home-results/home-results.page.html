@@ -26,7 +26,7 @@
         >
             <ion-item>
                 <ion-label>
-                    <h3>{{ con.nombre }}</h3>
+                    <h3>{{ con.username }}</h3>
                     <p>
                         <span style="font-size: small; font-weight: bolder;"
                             >Diezmo: ${{ con.diezmo }} - Ofrenda: ${{
@@ -47,7 +47,10 @@
                 <ion-item-option (click)="favorite(con)">
                     <ion-icon slot="icon-only" name="heart"></ion-icon>
                 </ion-item-option>
-                <ion-item-option color="secondary" (click)="info_register(con)">
+                <ion-item-option
+                    color="secondary"
+                    (click)="info_register(con, usuarios)"
+                >
                     <ion-icon
                         slot="icon-only"
                         name="information-circle"
