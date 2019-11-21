@@ -17,7 +17,7 @@ export class ConteosCreatePage implements OnInit {
     ofrenda: number;
     primicia: number;
     inversion: number;
-    cumpleanios: number;
+    cumpleanos: number;
     agradecimiento: number;
     otro: number;
     usuarios: any;
@@ -42,7 +42,7 @@ export class ConteosCreatePage implements OnInit {
         console.log("diezmo: " + this.diezmo);
         console.log("ofrenda: " + this.ofrenda);
         console.log("primicias" + this.primicia);
-        console.log("cumpleaños: " + this.cumpleanios);
+        console.log("cumpleaños: " + this.cumpleanos);
         console.log("inversion: " + this.inversion);
         console.log("agradecimiento: " + this.agradecimiento);
         console.log("otro: " + this.otro);
@@ -59,11 +59,11 @@ export class ConteosCreatePage implements OnInit {
             user: this.iduser,
             diezmo: this.diezmo,
             ofrenda: this.ofrenda,
-            primicia: this.primicia,
-            cumpleanios: this.cumpleanios,
+            primicias: this.primicia,
+            cumpleanos: this.cumpleanos,
             inversion: this.inversion,
             agradecimiento: this.agradecimiento,
-            otro: this.otro
+            otros: this.otro
         };
         /*const body = new HttpParams()
             .set("diezmo", this.diezmo.toString())

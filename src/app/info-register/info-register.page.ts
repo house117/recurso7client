@@ -24,11 +24,11 @@ export class InfoRegisterPage implements OnInit {
     nombre: string;
     diezmo: number;
     ofrenda: number;
-    primicia: number;
+    primicias: number;
     inversion: number;
     cumpleanos: number;
     agradecimiento: number;
-    otro: number;
+    otros: number;
     id: any;
     constructor(
         public menuCtrl: MenuController,
@@ -58,11 +58,11 @@ export class InfoRegisterPage implements OnInit {
         //this.nombre = this.conteo.nombre;
         this.diezmo = this.conteo.diezmo;
         this.ofrenda = this.conteo.ofrenda;
-        this.primicia = this.conteo.primicia;
+        this.primicias = this.conteo.primicias;
         this.cumpleanos = this.conteo.cumpleanos;
         this.agradecimiento = this.conteo.agradecimiento;
         this.inversion = this.conteo.inversion;
-        this.otro = this.conteo.otro;
+        this.otros = this.conteo.otros;
         console.log("CONTEO: " + this.conteo.username);
     }
     updateRegistro() {
@@ -79,11 +79,11 @@ export class InfoRegisterPage implements OnInit {
             user: this.conteo.user,
             diezmo: this.diezmo,
             ofrenda: this.ofrenda,
-            primicia: this.primicia,
+            primicias: this.primicias,
             cumpleanos: this.cumpleanos,
             inversion: this.inversion,
             agradecimiento: this.agradecimiento,
-            otro: this.otro
+            otros: this.otros
         };
         /*const body = new HttpParams()
             .set("diezmo", this.diezmo.toString())

@@ -36,7 +36,7 @@ export class AppComponent {
 
             {
                 title: "Departamentos",
-                url: "/dep-results",
+                url: "/tabs-d/dep-results",
                 direct: "forward",
                 icon: "md-analytics"
             }

@@ -56,27 +56,27 @@ export class HomeResultsPage implements OnInit {
                 console.log(this.usuarios);
 
                 for (i = 0; i < this.conteo.length; i++) {
-                    this.diezmo += parseFloat(this.conteo[i].diezmo);
+                    if (this.conteo[i].diezmo) {
+                        this.diezmo += parseFloat(this.conteo[i].diezmo);
+                    }                   
                     if (this.conteo[i].ofrenda) {
                         this.ofrenda += parseFloat(this.conteo[i].ofrenda);
                     }
-                    if (this.conteo[i].primicia) {
-                        this.primicia += parseFloat(this.conteo[i].primicia);
+                    if (this.conteo[i].primicias) {
+                        this.primicia += parseFloat(this.conteo[i].primicias);
                     }
                     if (this.conteo[i].inversion) {
                         this.inversion += parseFloat(this.conteo[i].inversion);
                     }
-                    if (this.conteo[i].inversion) {
-                        this.inversion += parseFloat(this.conteo[i].inversion);
-                    }
+                   
                     if (this.conteo[i].cumpleanos) {
                         this.cumpleanos += parseFloat(
                             this.conteo[i].cumpleanos
                         );
                     }
-                    if (this.conteo[i].agradecimientos) {
+                    if (this.conteo[i].agradecimiento) {
                         this.agradecimientos += parseFloat(
-                            this.conteo[i].agradecimientos
+                            this.conteo[i].agradecimiento
                         );
                     }
                     if (this.conteo[i].otros) {
@@ -167,20 +167,17 @@ export class HomeResultsPage implements OnInit {
                     "DELETE call successful value returned in body",
                     val
                 );
+                this.ngOnInit();
             },
             response => {
                 console.log("DELETE call in error", response);
             },
             () => {
                 console.log("The DELETE observable is now completed.");
-                this.http
-                    .get(`http://localhost:5000/api/conteo/hoy`)
-                    .subscribe(res => {
-                        this.conteo = res;
-                        console.log(this.conteo);
-                    });
+                this.ngOnInit();
             }
         );
+        this.ngOnInit();
         //location.replace(document.referrer);
     }
     toggleMenu() {
@@ -281,7 +278,7 @@ export class HomeResultsPage implements OnInit {
                     icon: "close",
                     role: "cancel",
                     handler: () => {
-                        console.log("Cancel clicked");
+                        this.ngOnInit(); 
                     }
                 }
             ]

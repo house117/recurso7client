@@ -5,13 +5,22 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DepResultsPage } from './dep-results.page';
-import { PipesModule } from '../pipes/pipes.module';
+import { TabsDPage } from './tabs-d.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: DepResultsPage
+    component: TabsDPage,
+    children: [
+      {
+        path: 'dep-results',
+        loadChildren: '../dep-results/dep-results.module#DepResultsPageModule'
+      },
+      {
+        path: 'dep-create',
+        loadChildren: '../dep-create/dep-create.module#DepCreatePageModule'
+      }
+    ]
   }
 ];
 
@@ -20,9 +29,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    PipesModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [DepResultsPage]
+  declarations: [TabsDPage]
 })
-export class DepResultsPageModule {}
+export class TabsDPageModule {}
