@@ -4,26 +4,22 @@ import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Location } from "@angular/common";
 import {
-  NavController,
-  AlertController,
-  MenuController,
-  ToastController,
-  PopoverController,
-  ModalController
+    NavController,
+    AlertController,
+    MenuController,
+    ToastController,
+    PopoverController,
+    ModalController
 } from "@ionic/angular";
 
-
 @Component({
-  selector: 'app-info-dep',
-  templateUrl: './info-dep.page.html',
-  styleUrls: ['./info-dep.page.scss'],
+    selector: "app-info-dep",
+    templateUrl: "./info-dep.page.html",
+    styleUrls: ["./info-dep.page.scss"]
 })
-
-
 export class InfoDepPage implements OnInit {
-
-  deps: any;
-  url = "http://localhost:5000/api/departamentos/";
+    deps: any;
+    url = "http://localhost:5000/api/departamentos/";
 
     _id: string;
     nombre: string;
@@ -52,11 +48,11 @@ export class InfoDepPage implements OnInit {
     ngOnInit() {
         //let id = this.activatedRoute.snapshot.paramMap.get("special");
 
-        console.log("Usuario: " + this.deps);
+        console.log("Departamento: " + this.deps);
         this.nombre = this.deps.nombre;
-        this.porcentaje = this.deps.apellidos;
+        this.porcentaje = this.deps.porcentaje;
         this.saldo = this.deps.saldo;
-       
+
         this.http
             .get(`http://localhost:5000/api/departamentos/${this.deps._id}`)
             .subscribe(res => {
@@ -65,14 +61,13 @@ export class InfoDepPage implements OnInit {
                     (this.nombre = this.deps.nombre);
                 this.porcentaje = this.deps.apellidos;
                 this.saldo = this.deps.cargo;
-                
             });
     }
     updateDep() {
         console.log("nombre: " + this.nombre);
         console.log("porcentaje: " + this.porcentaje);
         console.log("saldo" + this.saldo);
-        
+
         const headerDict = {
             "Content-Type": "application/json",
             Accept: "application/json"
@@ -86,27 +81,31 @@ export class InfoDepPage implements OnInit {
             nombre: this.nombre,
             porcentaje: this.porcentaje,
             saldo: this.saldo
-            
         };
         const body = new HttpParams()
             .set("id", this.deps._id)
             .set("porcentaje", this.nombre)
             .set("porcentaje", this.porcentaje)
             .set("saldo", this.saldo);
-        this.http.post("http://localhost:5000/api/departamentos/", data).subscribe(
-            val => {
-                console.log("POST call successful value returned in body", val);
-                location.replace("/tabs-d/dep-results");
-            },
-            response => {
-                console.log("POST call in error", response);
-            },
-            () => {
-                console.log("The POST observable is now completed.");
-            }
-        );
+        this.http
+            .post("http://localhost:5000/api/departamentos/", data)
+            .subscribe(
+                val => {
+                    console.log(
+                        "POST call successful value returned in body",
+                        val
+                    );
+                    location.replace("/tabs-d/dep-results");
+                },
+                response => {
+                    console.log("POST call in error", response);
+                },
+                () => {
+                    console.log("The POST observable is now completed.");
+                }
+            );
     }
-    
+
     alertaUpdate() {
         const alert = this.alertCtrl
             .create({
