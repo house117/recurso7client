@@ -138,6 +138,8 @@ export class MiembrosIglesiaPage implements OnInit {
   } 
 
   miembros_info(usuario) {
+    this.presentToast('Información del miembro!');
+    this.lista.closeSlidingItems();
     //this.navCtrl.navigateForward(InfoMiembro, { id: usuario._id });
     let navigationExtras: NavigationExtras = {
         state: {

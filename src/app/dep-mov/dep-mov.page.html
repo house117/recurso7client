@@ -1,51 +1,98 @@
 <ion-header>
-    <ion-toolbar color="tertiary">
+  <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-button color="tertiary" (click)="close()">
-          <ion-icon name="md-arrow-back" color="light"></ion-icon>
-        </ion-button>
+          <ion-back-button
+              color="secondary"
+              defaultHref="/tabs-d/dep-results"
+          ></ion-back-button>
       </ion-buttons>
-      <ion-title>
-        Realizar Movimiento
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content padding>
-    <form class="list-form">
-      <ion-item no-padding class="animated fadeInUp">
-        <ion-label position="floating">
-          <ion-icon name="logo-buffer" item-start></ion-icon>
-          Departamento
-        </ion-label>
-        <ion-input color="secondary" type="text" value="Jóvenes" disabled="disabled"></ion-input>
-      </ion-item>
-  
-  
-      <ion-item no-padding class="animated fadeInUp">
-        <ion-label position="floating">
-          <ion-icon name="md-cash" item-start></ion-icon>
-          Monto
-        </ion-label>
-        <ion-input color="secondary" type="number"></ion-input>
-      </ion-item>
-  
-      <ion-item no-padding class="animated fadeInUp">
-        <ion-label position="floating">
-          <ion-icon name="md-card" item-start></ion-icon>
-          Tipo de Movimiento
-        </ion-label>
-        <ion-select>
-            <ion-select-option value="alta">Alta</ion-select-option>
-            <ion-select-option value="baja">Baja</ion-select-option>
-        </ion-select>
-      </ion-item>
-    </form>
-  
-    <div margin-top>
-      <ion-button icon-left size="medium" expand="full" shape="round" color="tertiary" (click)=" close()">
-        <ion-icon name="log-in"></ion-icon>
-        Registrar
-      </ion-button>
-    </div>
-  </ion-content>
+
+      <ion-title color="secondary">Realizar Movimiento</ion-title>
+
+      <ion-buttons slot="end">
+          <ion-avatar>
+              <img src="/assets/img/mov.png" />
+          </ion-avatar>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+
+    <ion-item color="secondary">
+      <ion-label class="titulo-center"><b>Datos del Movimiento</b></ion-label>
+    </ion-item>
+    
+    <ion-card-content>
+      <form>
+        
+        <ion-item>
+          <ion-label position="floating" class="text-title">
+              <ion-icon name="cash" item-start></ion-icon>&nbsp;Tipo
+          </ion-label>
+          <ion-select name="tipo" [(ngModel)]="tipo" class="text-field" required>
+              <ion-select-option value="Ingreso">Ingreso</ion-select-option>
+              <ion-select-option value="Egreso">Egreso</ion-select-option>
+          </ion-select>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label position="floating" class="text-title">
+            <ion-icon name="logo-usd" item-start></ion-icon>&nbsp;Cantidad
+          </ion-label>
+          <ion-input type="number" class="text-field" name="cantidad" [(ngModel)]="cantidad" required></ion-input>
+        </ion-item>
+
+        
+        
+
+        <ion-item>
+            <ion-label position="floating" class="text-title">
+                <ion-icon name="create" item-start></ion-icon>&nbsp;Motivo
+            </ion-label>
+            <ion-textarea class="text-field" name="motivo" [(ngModel)]="motivo" clearOnEdit="true"></ion-textarea>
+        </ion-item>
+
+        <ion-button expand="full" (click)="createMov()" color="danger"> Agregar </ion-button>
+      
+      </form>
+      
+    </ion-card-content>
+
+
+    <ion-item color="secondary">
+      <ion-label class="titulo-center"><b>Lista de Movimientos</b></ion-label>
+    </ion-item>
+
+    <ion-list #lista>
+      <ion-item-sliding
+          *ngFor="let mov of movs"
+      >
+          <ion-item>
+              <ion-label>
+                  <h3>{{ mov.tipo }}</h3>
+                  <p>
+                      {{ mov.motivo }}
+                  </p>
+              </ion-label>
+
+              <ion-label slot="end" text-right>
+                  <span style="font-size: small; font-weight: bolder;"
+                      >{{ mov.cantidad }}</span
+                  >
+              </ion-label>
+          </ion-item>
+
+          
+
+          <ion-item-options side="end">
+              <ion-item-option color="danger" (click)="borrar(mov)">
+                  <ion-icon slot="icon-only" name="trash"></ion-icon>
+              </ion-item-option>
+          </ion-item-options>
+      </ion-item-sliding>
+  </ion-list>
+
+</ion-card>
+</ion-content>

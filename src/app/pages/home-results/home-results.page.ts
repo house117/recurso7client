@@ -186,6 +186,8 @@ export class HomeResultsPage implements OnInit {
     info_register(conteo) {
         //this.navCtrl.navigateForward(InfoMiembro, { id: usuario._id });
 
+        this.presentToast("Información del registro");
+        this.lista.closeSlidingItems();
         let navigationExtras: NavigationExtras = {
             state: {
                 conteo: conteo

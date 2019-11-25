@@ -28,13 +28,13 @@ export class EditProfilePage implements OnInit {
       const toast = await this.toastCtrl.create({
         showCloseButton: true,
         cssClass: 'bg-profile',
-        message: 'Your Data was Edited!',
+        message: 'Gracias por visitarnos!',
         duration: 3000,
         position: 'bottom'
       });
 
       toast.present();
-      this.navCtrl.navigateForward('/home-results');
+      this.navCtrl.navigateForward('/tabs/miembros-iglesia');
     });
   }
 

@@ -38,7 +38,7 @@ export class DepResultsPage implements OnInit {
     private router: Router 
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { 
     //this.usuarios = this.getUsers();
     this.http.get(`http://localhost:5000/api/departamentos/`).subscribe(res => {
             this.deps = res;
@@ -136,7 +136,7 @@ export class DepResultsPage implements OnInit {
     };
     this.router.navigate(["info-dep"], navigationExtras);
   }
-
+ 
   dep_mov(dep) {
     //this.navCtrl.navigateForward(InfoMiembro, { id: usuario._id });
     let navigationExtras: NavigationExtras = {
