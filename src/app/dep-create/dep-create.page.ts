@@ -7,6 +7,9 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { HttpParams } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { LoadingController } from '@ionic/angular';
+import { IonList, ToastController } from '@ionic/angular';
+import { ViewChild } from '@angular/core';
 @Component({
     selector: "app-dep-create",
     templateUrl: "./dep-create.page.html",
@@ -17,14 +20,16 @@ export class DepCreatePage implements OnInit {
     nombre: string;
     porcentaje: string;
     saldo: string;
-
+    @ViewChild('lista') lista: IonList;
     constructor(
         private activatedRoute: ActivatedRoute,
         private modalCtrl: ModalController,
+        private toastCtrl: ToastController,
         private http: HttpClient,
         private router: Router,
+        private loadingCtrl: LoadingController,
         private menuCtrl: MenuController
-    ) {}
+    ) { }
     ngOnInit() {
         //let id = this.activatedRoute.snapshot.paramMap.get("id");
         this.http
@@ -68,7 +73,7 @@ export class DepCreatePage implements OnInit {
                         "POST call successful value returned in body",
                         val
                     );
-                    location.replace("/tabs-d/dep-results");
+                    this.present("Agregando departamento...");
                 },
                 response => {
                     console.log("POST call in error", response);
@@ -81,4 +86,41 @@ export class DepCreatePage implements OnInit {
     toggleMenu() {
         this.menuCtrl.toggle();
     }
+
+    isLoading = false;
+
+
+    async present(message: string) {
+        this.isLoading = true;
+        return await this.loadingCtrl.create({
+            message,
+            duration: 3000,
+        }).then(a => {
+            a.present().then(() => {
+                
+                location.replace("/tabs-d/dep-results");
+                
+                
+               
+
+                if (this.isLoading) {
+                    
+                    a.dismiss().then(() => this.presentToast('Porcentaje invalido!'));
+                }
+            });
+        });
+    }
+
+    async dismiss() {
+        this.isLoading = false;
+        return await this.loadingCtrl.dismiss().then(() => console.log('dismissed'));
+    }
+    async presentToast(message: string) {
+        const toast = await this.toastCtrl.create({
+            message,
+            duration: 2000
+        });
+        toast.present();
+    }
+
 }

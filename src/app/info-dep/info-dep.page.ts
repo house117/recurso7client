@@ -3,6 +3,8 @@ import { ActivatedRoute } from "@angular/router";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Location } from "@angular/common";
+import { LoadingController } from '@ionic/angular';
+
 import {
     NavController,
     AlertController,
@@ -35,6 +37,7 @@ export class InfoDepPage implements OnInit {
         public navCtrl: NavController,
         private activatedRoute: ActivatedRoute,
         private http: HttpClient,
+        private loadingCtrl: LoadingController,
         private router: Router,
         private location: Location
     ) {
@@ -95,12 +98,13 @@ export class InfoDepPage implements OnInit {
                         "POST call successful value returned in body",
                         val
                     );
-                    location.replace("/tabs-d/dep-results");
+                    this.present("Actualizando datos ...");
                 },
                 response => {
                     console.log("POST call in error", response);
                 },
                 () => {
+                    
                     console.log("The POST observable is now completed.");
                 }
             );
@@ -114,5 +118,30 @@ export class InfoDepPage implements OnInit {
                 buttons: ["Aceptar"]
             })
             .then(alert => alert.present());
+    }
+
+    
+isLoading = false;
+
+
+    async present(message: string) {
+        this.isLoading = true;
+        return await this.loadingCtrl.create({
+            message,
+            duration: 3000,
+        }).then(a => {
+            a.present().then(() => {
+                console.log('presented');
+                location.replace("/tabs-d/dep-results");
+                if (this.isLoading) {
+                    a.dismiss().then(() => console.log('abort presenting'));
+                }
+            });
+        });
+    }
+
+    async dismiss() {
+        this.isLoading = false;
+        return await this.loadingCtrl.dismiss().then(() => console.log('dismissed'));
     }
 }

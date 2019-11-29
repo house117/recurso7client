@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Location } from "@angular/common";
+import { LoadingController } from '@ionic/angular';
 import {
     NavController,
     AlertController,
@@ -19,12 +20,14 @@ import {
 })
 export class DepMovPage implements OnInit {
     deps: any;
+    deps2: any;
     url = "http://localhost:5000/api/movimientos/";
 
     _id: string;
     tipo: string;
     cantidad: string;
     motivo: string;
+    saldo: string;
     id: any;
     movs: any;
     constructor(
@@ -37,6 +40,7 @@ export class DepMovPage implements OnInit {
         private activatedRoute: ActivatedRoute,
         private http: HttpClient,
         private router: Router,
+        private loadingCtrl: LoadingController,
         private location: Location
     ) {
         this.activatedRoute.queryParams.subscribe(params => {
@@ -65,6 +69,10 @@ export class DepMovPage implements OnInit {
             this.motivo = this.deps.motivo;
             */
             });
+        //FUNCION NUEVA
+        
+       
+        //fin DE FUNCION NUEVA
     }
     createMov() {
         console.log("tipo: " + this.tipo);
@@ -98,7 +106,11 @@ export class DepMovPage implements OnInit {
                         "POST call successful value returned in body",
                         val
                     );
-                    location.replace("/tabs-d/dep-results");
+                    this.present("Registrando movimiento ...");
+
+                    this.dismiss();
+                    
+                    
                 },
                 response => {
                     console.log("POST call in error", response);
@@ -107,6 +119,31 @@ export class DepMovPage implements OnInit {
                     console.log("The POST observable is now completed.");
                 }
             );
+            //location.replace("/tabs-d/dep-results");
+    }
+
+    isLoading = false;
+
+
+    async present(message: string) {
+        this.isLoading = true;
+        return await this.loadingCtrl.create({
+            message,
+            duration: 3000,
+        }).then(a => {
+            a.present().then(() => {
+                console.log('presented');
+                location.replace("/tabs-d/dep-results");
+                if (this.isLoading) {
+                    a.dismiss().then(() => console.log('abort presenting'));
+                }
+            });
+        });
+    }
+
+    async dismiss() {
+        this.isLoading = false;
+        return await this.loadingCtrl.dismiss().then(() => console.log('dismissed'));
     }
 
     alertaUpdate() {
@@ -166,6 +203,6 @@ export class DepMovPage implements OnInit {
                     });
             }
         );
-        //location.replace(document.referrer);
+       this.present("Eliminando movimiento ..");
     }
 }

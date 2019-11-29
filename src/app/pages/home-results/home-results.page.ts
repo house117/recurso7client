@@ -8,6 +8,7 @@ import { ActivatedRoute, NavigationExtras } from "@angular/router";
 import { HttpParams } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { IonInfiniteScroll } from "@ionic/angular";
+import { LoadingController } from '@ionic/angular';
 import {
     NavController,
     AlertController,
@@ -27,9 +28,10 @@ export class HomeResultsPage implements OnInit {
     conteo: any;
     usuarios: any;
     url = "http://localhost:5000/api/conteo/";
-
+    loading: any;
     constructor(
         private actionSheetCtrl: ActionSheetController,
+        private loadingCtrl: LoadingController,
         private menuCtrl: MenuController,
         private toastCtrl: ToastController,
         private http: HttpClient,
@@ -39,9 +41,14 @@ export class HomeResultsPage implements OnInit {
         public modalCtrl: ModalController,
         private activatedRoute: ActivatedRoute,
         private router: Router
-    ) {}
+    ) { }
 
     ngOnInit() {
+        this.present("Actualizando Datos ...");
+
+        setTimeout(() => {
+            this.dismiss();
+        }, 1500);
         //this.usuarios = this.getUsers();
         this.http.get(`http://localhost:5000/api/conteo/hoy`).subscribe(res => {
             this.conteo = res;
@@ -58,7 +65,7 @@ export class HomeResultsPage implements OnInit {
                 for (i = 0; i < this.conteo.length; i++) {
                     if (this.conteo[i].diezmo) {
                         this.diezmo += parseFloat(this.conteo[i].diezmo);
-                    }                   
+                    }
                     if (this.conteo[i].ofrenda) {
                         this.ofrenda += parseFloat(this.conteo[i].ofrenda);
                     }
@@ -68,7 +75,7 @@ export class HomeResultsPage implements OnInit {
                     if (this.conteo[i].inversion) {
                         this.inversion += parseFloat(this.conteo[i].inversion);
                     }
-                   
+
                     if (this.conteo[i].cumpleanos) {
                         this.cumpleanos += parseFloat(
                             this.conteo[i].cumpleanos
@@ -83,16 +90,14 @@ export class HomeResultsPage implements OnInit {
                         this.otros = parseFloat(this.conteo[i].otros);
                     }
 
-                    console.log("ASDASDFASDFASDF");
+
                     for (j = 0; j < this.usuarios.length; j++) {
-                        console.log("BBBBBBBBBBBBBBBBBBB");
-                        console.log("CONTEO USER ID" + this.conteo[i].user);
-                        console.log("USER ID " + this.usuarios[j]._id);
+
                         if (
                             this.conteo[i].user.toString() ==
                             this.usuarios[j]._id.toString()
                         ) {
-                            console.log("MATCH!");
+
                             this.conteo[i].username =
                                 this.usuarios[j].nombre.toString() +
                                 " " +
@@ -113,6 +118,50 @@ export class HomeResultsPage implements OnInit {
 
         //var usuario = "";
     }
+    //
+    isLoading = false;
+
+
+    async present(message: string) {
+        this.isLoading = true;
+        return await this.loadingCtrl.create({
+                message,
+            duration: 1500,
+        }).then(a => {
+            a.present().then(() => {
+                console.log('presented');
+                if (this.isLoading) {
+                    a.dismiss().then(() => console.log('abort presenting'));
+                }
+            });
+        });
+    }
+
+    async dismiss() {
+        this.isLoading = false;
+        return await this.loadingCtrl.dismiss().then(() => console.log('dismissed'));
+    }
+    //
+    async presentLoading(message: string) {
+        this.loading = await this.loadingCtrl.create({
+            message
+            // duration: 2000
+        });
+        return this.loading.present();
+    }
+
+
+    doRefresh(event) {
+
+        setTimeout(() => {
+
+            location.reload();
+            event.target.complete();
+
+        }, 1500);
+
+    }
+
     async presentToast(message: string) {
         const toast = await this.toastCtrl.create({
             message,
@@ -167,7 +216,7 @@ export class HomeResultsPage implements OnInit {
                     "DELETE call successful value returned in body",
                     val
                 );
-                this.ngOnInit();
+
             },
             response => {
                 console.log("DELETE call in error", response);
@@ -177,8 +226,8 @@ export class HomeResultsPage implements OnInit {
                 this.ngOnInit();
             }
         );
-        this.ngOnInit();
-        //location.replace(document.referrer);
+
+        //location.replace("tabs-o/home-results");
     }
     toggleMenu() {
         this.menuCtrl.toggle();
@@ -212,6 +261,7 @@ export class HomeResultsPage implements OnInit {
     total = 0.0;
 
     async presentActionSheet() {
+        //this.actu();
         const actionSheet = await this.actionSheetCtrl.create({
             header: "Subtotales",
             backdropDismiss: false,
@@ -280,12 +330,18 @@ export class HomeResultsPage implements OnInit {
                     icon: "close",
                     role: "cancel",
                     handler: () => {
-                        this.ngOnInit(); 
+
+                        //location.replace("tabs-o/home-results");
+                        //actionSheet.forceUpdate();
+
                     }
                 }
             ]
         });
 
         await actionSheet.present();
+
     }
+
+
 }

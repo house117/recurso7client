@@ -39,6 +39,13 @@ export class AppComponent {
                 url: "/tabs-d/dep-results",
                 direct: "forward",
                 icon: "md-analytics"
+            },
+
+            {
+                title: "Favoritos",
+                url: "/favoritos",
+                direct: "forward",
+                icon: "heart"
             }
         ];
 

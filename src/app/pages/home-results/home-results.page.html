@@ -16,22 +16,20 @@
             </ion-avatar>
         </ion-buttons>
     </ion-toolbar>
-    <ion-searchbar animated (ionChange)="buscar( $event )"> </ion-searchbar>
+    <ion-searchbar animated (ionChange)="buscar( $event )" placeholder="Buscar registro"> </ion-searchbar>
 </ion-header>
 
 <ion-content padding>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <ion-list #lista>
-        <ion-item-sliding
-            *ngFor="let con of conteo  | filtro: textoBuscar: 'username'"
-        >
+        <ion-item-sliding *ngFor="let con of conteo  | filtro: textoBuscar: 'username'">
             <ion-item>
                 <ion-label>
                     <h3>{{ con.username }}</h3>
                     <p>
-                        <span style="font-size: small; font-weight: bolder;"
-                            >Diezmo: ${{ con.diezmo }} - Ofrenda: ${{
-                            con.ofrenda }}</span
-                        >
+                        <span style="font-size: small; font-weight: bolder;">Desliza para ver más</span>
                     </p>
                 </ion-label>
 
@@ -47,14 +45,8 @@
                 <ion-item-option (click)="favorite(con)">
                     <ion-icon slot="icon-only" name="heart"></ion-icon>
                 </ion-item-option>
-                <ion-item-option
-                    color="secondary"
-                    (click)="info_register(con, usuarios)"
-                >
-                    <ion-icon
-                        slot="icon-only"
-                        name="information-circle"
-                    ></ion-icon>
+                <ion-item-option color="secondary" (click)="info_register(con, usuarios)">
+                    <ion-icon slot="icon-only" name="information-circle"></ion-icon>
                 </ion-item-option>
             </ion-item-options>
 
@@ -69,11 +61,7 @@
 
 <ion-footer>
     <ion-toolbar color="google">
-        <ion-button
-            expand="full"
-            color="warning"
-            (click)="presentActionSheet()"
-        >
+        <ion-button expand="full" color="warning" (click)="presentActionSheet()">
             Mostrar totales
         </ion-button>
     </ion-toolbar>

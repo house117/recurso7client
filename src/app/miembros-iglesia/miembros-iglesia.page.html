@@ -25,7 +25,7 @@
     </ion-toolbar>
 
     <ion-searchbar animated
-                (ionChange)="buscar( $event )">
+                (ionChange)="buscar( $event )" placeholder="Buscar miembro">
     </ion-searchbar>
   </ion-header>
 <ion-content padding>
@@ -48,12 +48,13 @@
   
       </ion-item>
 
-      <ion-item-options side="start">
+      <ion-item-options side="start" *ngIf="always=='VERDADERO'">
         <!-- <ion-item-option (click)="favorite(item)">Favorite</ion-item-option> -->
         <!-- <ion-item-option color="danger" (click)="share(item)">Share</ion-item-option> -->
 
-        <ion-item-option (click)="favorite(user)">
-          <ion-icon slot="icon-only" name="heart"></ion-icon>
+        <ion-item-option   (click)="favorite(user)">
+          <ion-icon *ngIf="user.favorito=='VERDADERO'" slot="icon-only" name="heart"></ion-icon>
+          <ion-icon *ngIf="user.favorito=='FALSO'" slot="icon-only" name="heart-empty"></ion-icon>
         </ion-item-option>
         <ion-item-option color="secondary" (click)="miembros_info(user)">
             <ion-icon slot="icon-only" name="information-circle"></ion-icon>

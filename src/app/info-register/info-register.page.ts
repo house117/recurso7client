@@ -29,6 +29,7 @@ export class InfoRegisterPage implements OnInit {
     cumpleanos: number;
     agradecimiento: number;
     otros: number;
+    total: number;
     id: any;
     constructor(
         public menuCtrl: MenuController,
@@ -65,11 +66,12 @@ export class InfoRegisterPage implements OnInit {
         this.otros = this.conteo.otros;
         console.log("CONTEO: " + this.conteo.username);
     }
-    updateRegistro() {
+    async updateRegistro() {
         const headerDict = {
             "Content-Type": "application/json",
             Accept: "application/json"
         };
+        this.total = this.convertUndefined(this.diezmo) + this.convertUndefined(this.ofrenda) + this.convertUndefined(this.primicias) + this.convertUndefined(this.cumpleanos) +this.convertUndefined(this.inversion) + this.convertUndefined(this.agradecimiento) +this.convertUndefined(this.otros);
 
         const requestOptions = {
             headers: new HttpHeaders(headerDict)
@@ -85,14 +87,34 @@ export class InfoRegisterPage implements OnInit {
             agradecimiento: this.agradecimiento,
             otros: this.otros
         };
-        /*const body = new HttpParams()
-            .set("diezmo", this.diezmo.toString())
-            .set("ofrenda", this.ofrenda.toString())
-            .set("primicia", this.primicia.toString())
-            .set("cumpleanios", this.cumpleanios.toString())
-            .set("inversion", this.inversion.toString())
-            .set("agradecimiento", this.agradecimiento.toString())
-            .set("otro", this.otro.toString());*/
+        const alert = await this.alertCtrl.create({
+            header: "Confirmación",
+            message: "El monto total de este miembro es <strong>"+this.total+"</strong> pesos",
+            buttons: [
+                {
+                    text: "Cancelar",
+                    role: "cancel",
+                    cssClass: "secondary",
+                    handler: blah => {
+                        console.log("Confirm Cancel: Cancelar");
+                    }
+                },
+                {
+                    text: "Aceptar y actualizar",
+                    handler: () => {
+                        
+                        this.updateCont(data);
+                       
+                    }
+                }
+            ]
+        });
+        await alert.present();
+        //fin de mensaje
+       
+    }
+
+    updateCont(data){
         this.http.post("http://localhost:5000/api/conteo/", data).subscribe(
             val => {
                 console.log("POST call successful value returned in body", val);
@@ -107,6 +129,14 @@ export class InfoRegisterPage implements OnInit {
         );
     }
 
+    convertUndefined(number){
+        if(number==undefined){
+            return 0;
+        }else{
+            return number;
+        }
+        
+    }
     alertaUpdate() {
         const alert = this.alertCtrl
             .create({

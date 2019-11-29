@@ -6,6 +6,13 @@ import { MenuController } from "@ionic/angular";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { HttpParams } from "@angular/common/http";
 import { Router } from "@angular/router";
+import {
+    NavController,
+    AlertController,
+    ToastController,
+    PopoverController
+} from "@ionic/angular";
+
 @Component({
     selector: "app-conteos-create",
     templateUrl: "./conteos-create.page.html",
@@ -20,6 +27,7 @@ export class ConteosCreatePage implements OnInit {
     cumpleanos: number;
     agradecimiento: number;
     otro: number;
+    total: number;
     usuarios: any;
 
     constructor(
@@ -27,6 +35,7 @@ export class ConteosCreatePage implements OnInit {
         private modalCtrl: ModalController,
         private http: HttpClient,
         private router: Router,
+        public alertCtrl: AlertController,
         private menuCtrl: MenuController
     ) {}
 
@@ -37,7 +46,7 @@ export class ConteosCreatePage implements OnInit {
         });
     }
 
-    createRegistro() {
+    async createRegistro() {
         console.log("iduser: " + this.iduser);
         console.log("diezmo: " + this.diezmo);
         console.log("ofrenda: " + this.ofrenda);
@@ -46,7 +55,9 @@ export class ConteosCreatePage implements OnInit {
         console.log("inversion: " + this.inversion);
         console.log("agradecimiento: " + this.agradecimiento);
         console.log("otro: " + this.otro);
-
+        
+        this.total = this.convertUndefined(this.diezmo) + this.convertUndefined(this.ofrenda) + this.convertUndefined(this.primicia) + this.convertUndefined(this.cumpleanos) +this.convertUndefined(this.inversion) + this.convertUndefined(this.agradecimiento) +this.convertUndefined(this.otro);
+        
         const headerDict = {
             "Content-Type": "application/json",
             Accept: "application/json"
@@ -65,17 +76,39 @@ export class ConteosCreatePage implements OnInit {
             agradecimiento: this.agradecimiento,
             otros: this.otro
         };
-        /*const body = new HttpParams()
-            .set("diezmo", this.diezmo.toString())
-            .set("ofrenda", this.ofrenda.toString())
-            .set("primicia", this.primicia.toString())
-            .set("cumpleanios", this.cumpleanios.toString())
-            .set("inversion", this.inversion.toString())
-            .set("agradecimiento", this.agradecimiento.toString())
-            .set("otro", this.otro.toString());*/
+         
+        //mensaje de confirmacion
+        const alert = await this.alertCtrl.create({
+            header: "Confirmación",
+            message: "El monto total de este miembro es <strong>"+this.total+"</strong> pesos",
+            buttons: [
+                {
+                    text: "Cancelar",
+                    role: "cancel",
+                    cssClass: "secondary",
+                    handler: blah => {
+                        console.log("Confirm Cancel: Cancelar");
+                    }
+                },
+                {
+                    text: "Aceptar y guardar",
+                    handler: () => {
+                        
+                        this.agregarCont(data);
+                       
+                    }
+                }
+            ]
+        });
+        await alert.present();
+        //fin de mensaje
+        
+    }
+    agregarCont(data){
         this.http.post("http://localhost:5000/api/conteo/", data).subscribe(
             val => {
                 console.log("POST call successful value returned in body", val);
+                //this.router.navigateByUrl("/tabs-o/home-results");
                 location.replace("/tabs-o/home-results");
             },
             response => {
@@ -85,6 +118,14 @@ export class ConteosCreatePage implements OnInit {
                 console.log("The POST observable is now completed.");
             }
         );
+    }
+    convertUndefined(number){
+        if(number==undefined){
+            return 0;
+        }else{
+            return number;
+        }
+        
     }
     toggleMenu() {
         this.menuCtrl.toggle();

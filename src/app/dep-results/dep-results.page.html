@@ -18,12 +18,15 @@
         </ion-buttons>
     </ion-toolbar>
 
-    <ion-searchbar animated (ionChange)="buscar( $event )"> </ion-searchbar>
+    <ion-searchbar animated (ionChange)="buscar( $event )" placeholder="Buscar departamento"> </ion-searchbar>
 </ion-header>
 
 <ion-content padding>
     <ion-list #lista>
-        <ion-item-sliding
+            <ion-title color="danger" *ngIf="sumaPor!=100">Verifica tus porcentajes</ion-title>
+            <ion-title color="primary" *ngIf="sumaPor==100">La suma de tu porcentaje es correcta</ion-title>
+
+            <ion-item-sliding
             *ngFor="let dep of deps  | filtro: textoBuscar: 'nombre'"
         >
             <ion-item>
@@ -36,7 +39,7 @@
 
                 <ion-label slot="end" text-right>
                     <span style="font-size: small; font-weight: bolder;"
-                        >{{ dep.saldo }}</span
+                        >Saldo {{ dep.saldo }}</span
                     >
                 </ion-label>
             </ion-item>

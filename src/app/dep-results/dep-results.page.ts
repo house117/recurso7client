@@ -37,13 +37,19 @@ export class DepResultsPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router 
   ) { }
-
+  sumaPor = 0;
   ngOnInit() { 
     //this.usuarios = this.getUsers();
     this.http.get(`http://localhost:5000/api/departamentos/`).subscribe(res => {
             this.deps = res;
-            console.log(this.deps);
+            for (var i = 0; i < this.deps.length; i++) {
+              console.log(this.deps[i].porcentaje);
+              this.sumaPor += parseFloat(this.deps[i].porcentaje);
+              console.log(this.sumaPor);
+            }
+            
     });
+    
   }
 
   
@@ -102,6 +108,7 @@ export class DepResultsPage implements OnInit {
     console.log("Función eliminar ...");
     this.http.delete(this.url + dep._id).subscribe(
         val => {
+          
             console.log(
                 "DELETE call successful value returned in body",
                 val
@@ -113,9 +120,10 @@ export class DepResultsPage implements OnInit {
         () => {
             console.log("The DELETE observable is now completed.");
             this.http.get(`http://localhost:5000/api/departamentos/`).subscribe(res => {
-            this.deps = res;
-            console.log(this.deps);
-    });
+              this.deps = res;
+              
+              
+      });
           }
     );
     //location.replace(document.referrer);

@@ -6,7 +6,8 @@ import { MenuController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { HttpParams } from "@angular/common/http";
 import { Router } from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { LoadingController } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
     selector: "app-miembros-create",
     templateUrl: "./miembros-create.page.html",
@@ -19,15 +20,16 @@ export class MiembrosCreatePage implements OnInit {
     cargo: string;
     email: string;
 
-    
+
 
     constructor(
         private activatedRoute: ActivatedRoute,
         private modalCtrl: ModalController,
         private http: HttpClient,
         private router: Router,
-        private menuCtrl: MenuController
-    ) {}
+        private menuCtrl: MenuController,
+        private loadingCtrl: LoadingController
+    ) { }
     ngOnInit() {
         //let id = this.activatedRoute.snapshot.paramMap.get("id");
         this.http.get(`http://localhost:5000/api/cities/`).subscribe(res => {
@@ -66,8 +68,7 @@ export class MiembrosCreatePage implements OnInit {
         this.http.post("http://localhost:5000/api/users/", data).subscribe(
             val => {
                 console.log("POST call successful value returned in body", val);
-                location.replace("/tabs/miembros-iglesia");
-                
+                this.present("Cargando lista de miembros ...");
             },
             response => {
                 console.log("POST call in error", response);
@@ -80,5 +81,29 @@ export class MiembrosCreatePage implements OnInit {
     toggleMenu() {
         this.menuCtrl.toggle();
     }
-    
+
+    isLoading = false;
+
+
+    async present(message: string) {
+        this.isLoading = true;
+        return await this.loadingCtrl.create({
+            message,
+            duration: 2000,
+        }).then(a => {
+            a.present().then(() => {
+                console.log('presented');
+                location.replace("/tabs/miembros-iglesia");
+                if (this.isLoading) {
+                    a.dismiss().then(() => console.log('abort presenting'));
+                }
+            });
+        });
+    }
+
+    async dismiss() {
+        this.isLoading = false;
+        return await this.loadingCtrl.dismiss().then(() => console.log('dismissed'));
+    }
+
 }

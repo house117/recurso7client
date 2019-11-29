@@ -70,7 +70,8 @@ const routes: Routes = [
   { path: 'tabs', loadChildren: './tabs/tabs.module#TabsPageModule' },
   { path: 'tabs-o', loadChildren: './tabs-o/tabs-o.module#TabsOPageModule' },
   { path: 'conteos-create', loadChildren: './conteos-create/conteos-create.module#ConteosCreatePageModule' },
-  { path: 'tabs-d', loadChildren: './tabs-d/tabs-d.module#TabsDPageModule' }
+  { path: 'tabs-d', loadChildren: './tabs-d/tabs-d.module#TabsDPageModule' },
+  { path: 'favoritos', loadChildren: './favoritos/favoritos.module#FavoritosPageModule' }
 
 
 ];
